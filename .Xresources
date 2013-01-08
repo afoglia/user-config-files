@@ -1,0 +1,71 @@
+!Emacs.font: -*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*
+Emacs.font: Terminus-9
+
+! rxvt configuration
+!
+! For details see
+! <http://wiki.afterstep.org/index.php?title=Rxvt-Unicode_Configuration_Tutorial> 
+
+! scrollback buffer lines - 65535 is max (64 is default)
+URxvt*saveLines:12000
+
+! font color (default is black)
+!URxvt*foreground:White
+
+! background color (prior to tinting) (default is white)
+!URxvt*background:Black
+
+! ! xft fonts - anti-aliased xft font setup is nice, but can be choppy
+! URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=13
+
+! traditional fonts - a more traditional font setup in lieu of xft
+URxvt*font:-*-terminus-medium-r-*-*-12-*-*-*-*-*-*
+!URxvt*boldFont:-*-courier-bold-r-normal-*-*-140-*-*-*-*-iso8859-1
+
+! urxvt color theme, based on
+! <http://yorikvanhavre.deviantart.com/art/urxvt-tango-theme-113968183>
+
+! urxvt*transparent: true
+! urxvt*shading: 50
+! urxvt*fading: 50
+! urxvt*font: xft:Bitstream\ Vera\ Sans\ Mono:style=roman:pixelsize=13
+! urxvt*scrollBar: false
+
+! background, foreground, tint color (for inheritPixmap)
+Rxvt*background: #080808
+Rxvt*foreground: #dadad8
+Rxvt*tintColor: #dadad8
+urxvt*colorBD: #ffffff
+! Should I also set urxvt*colorIT for italicized text?
+
+! Black + DarkGrey
+Rxvt*color0: #080808
+Rxvt*color8: #606060
+
+! DarkRed + Red
+Rxvt*color1: #ef5675
+Rxvt*color9: #ef5939
+
+! DarkGreen + Green
+Rxvt*color2: #c9e24e
+Rxvt*color10: #8ae234
+
+! DarkYellow + Yellow
+Rxvt*color3: #fcbc6d
+Rxvt*color11: #fce94f
+
+! DarkBlue + Blue
+Rxvt*color4: #8ac2cf
+Rxvt*color12: #729fcf
+
+! DarkMangenta + Mangenta
+Rxvt*color5: #a794ad
+Rxvt*color13: #ad7fa8
+
+! DarkCyan + Cyan
+Rxvt*color6: #62a38c
+Rxvt*color14: #72cfc3
+
+! LightGrey + White
+Rxvt*color7: #dadad8
+Rxvt*color15: #ffffff

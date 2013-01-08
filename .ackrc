@@ -1,0 +1,5 @@
+# Use less as a pager
+--pager=less -RX
+
+# Additional types
+--type-set=go=.go

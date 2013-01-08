@@ -1,0 +1,23 @@
+$include /etc/inputrc
+
+# Search history by default
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Show file types when listing completions
+set visible-stats on
+
+# Add trailing slash to completions of symlinks to directories
+set mark-symlinked-directories on
+
+# Do history expansion in bash
+$if Bash
+  Space: magic-space
+$endif
+
+# Use Meta-O to load previous command and put cursor after command name
+# (to quickly add new options)
+# Doesn't work:  See <https://bugs.launchpad.net/ubuntu/+source/readline5/+bug/56734> and <http://ubuntuforums.org/showthread.php?t=491843>
+#"\M-o": "\C-p\C-a\M-f "
+"\eo": "\C-p\C-a\ef "
+

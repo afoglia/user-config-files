@@ -1,0 +1,28 @@
+[color]
+  ui = auto
+[core]
+  pager = less -FX
+  excludesfile = ~/.gitignore
+  editor = "vim +0"
+[alias]
+  ci = commit
+  co = checkout
+  stat = status
+  logk = log --graph --oneline --decorate --all
+  # glog command like hg's equivalent
+  glog = log --graph --oneline --decorate --all
+  meld = ! git-meld.pl
+[color "diff"]
+  new = green bold
+  old = red bold
+  frag = magenta bold
+[credential]
+	helper = cache
+
+## The include feature doesn't work until git 1.7.10, which isn't
+## packaged for Ubuntu 12.04
+# # Store system-specific config (e.g. email) in separate file
+# [include]
+#   path = ~/.gitconfig.local
+[user]
+  email = afoglia@gmail.com
