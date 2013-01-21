@@ -80,20 +80,20 @@ ps_trunc_path ()
     return $(echo ${EXITSTATUS})
 }
 
-if [ ${CLICOLOR} ] ; then
+if [ ${CLICOLOR} ] || [ -n "${COLORTERM}" ] ; then
     color_prompt=yes
 fi
 
-if [ ${CLICOLOR} ] || [ "$color_prompt" = yes ] ; then
+if [ "$color_prompt" = yes ] ; then
+    # Define color codes
     COLOR_BOLD="\033[1m"
     COLOR_RED="\033[01;31m"
     COLOR_GREEN="\e[00;32m"
     COLOR_BLUE="\033[01;34m"
     COLOR_CYAN="\033[00;36m"
     COLOR_OFF="\033[00m"
-fi
 
-if [ "$color_prompt" = yes ] ; then
+    # Define prompts
 #    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     PS1="${debian_chroot:+($debian_chroot)}\[${COLOR_RED}\]\$(echo \$? | sed 's/^0$//' | sed 's/^\(.\)$/*\1*/' )\[${COLOR_GREEN}\]\u@\h\[${COLOR_OFF}\]:\[${COLOR_BLUE}\]\$(ps_trunc_path)\[${COLOR_OFF}\]:\[${COLOR_CYAN}\]\!\[${COLOR_OFF}\]\$ "
 
