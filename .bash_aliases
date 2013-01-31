@@ -77,4 +77,8 @@ fi
 # helpful Python aliases
 #
 # from justinlilly
-alias pypath='python -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"'
+pypath () {
+  # Pass in arguments (e.g. "-S" for disabling site module, or "-E" to
+  # ignore environmental variables)
+  python $* -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"
+}
