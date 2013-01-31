@@ -67,3 +67,8 @@ done
 export GOPATH=${HOME}/gocode
 
 unset -f add_to_path
+
+# Computer-specific, unshareable stuff goes here...
+if [[ -f ${HOME}/.profile.local ]] ; then
+  . ${HOME}/.profile.local
+fi
