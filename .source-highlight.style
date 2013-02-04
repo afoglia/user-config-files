@@ -1,0 +1,74 @@
+// Styles
+//
+// Modified from /usr/share/source-highlight/esc.style
+
+keyword yellow ;
+type, classname green b ;
+string black b ;
+regexp orange ;
+specialchar pink ;
+comment cyan i ;
+number red ;
+preproc darkblue b ;
+//symbol darkred ;
+//function black b;
+cbracket red;
+
+todo bg:cyan b;        // for TODO and FIXME
+code bg:brightgreen b; // for code snippets
+
+//Predefined variables and functions (for instance glsl)
+predef_var darkblue ;
+predef_func darkblue b ;
+
+
+// line numbers
+linenum yellow;
+
+// other elements for ChangeLog and Log files
+date blue ;
+time darkblue ;
+ip darkgreen ;
+file darkblue ;
+name darkgreen ;
+
+// for Prolog, Perl...
+variable darkgreen ;
+
+// explicit for Latex
+italics darkgreen i;
+bold darkgreen b;
+underline darkgreen u;
+fixed green f;
+argument darkgreen;
+optionalargument purple;
+math orange;
+bibtex blue;
+
+
+// Internet related
+url blue u;
+
+// for diffs
+oldfile orange;
+newfile darkgreen;
+difflines purple b; 
+
+// for css
+selector purple;
+property blue;
+value darkgreen i;
+
+// for oz
+atom orange;
+meta i;
+
+// for file system
+path orange;
+
+// for C (or other language) labels
+label teal b;
+
+// for errors
+error purple;
+warning darkgreen;

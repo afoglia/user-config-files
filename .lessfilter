@@ -1,11 +1,20 @@
 #!/bin/sh
 
+STYLE=${HOME}/.source-highlight.style
+
 case "$1" in
   *.diff|*.patch)
     colordiff < "$1"
     ;;
+  *ChangeLog|*changelog)
+    # I think the base style is better than mine for Changelogs 
+    source-highlight --failsafe -f esc --lang-def=changelog.lang \
+      -i $1 ;;
+  *Makefile|*makefile) 
+    source-highlight --failsafe -f esc --lang-def=makefile.lang \
+      --style-file=${STYLE} -i $1 ;;
   *)
-    # We don't handle this format.
+    # Unhandled format.
     exit 1
 esac
 
