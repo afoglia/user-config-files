@@ -11,6 +11,7 @@
   logk = log --graph --oneline --decorate --all
   # glog command like hg's equivalent
   glog = log --graph --oneline --decorate --all
+  # git-meld from <https://github.com/wmanley/git-meld>
   meld = ! git-meld.pl
 [color "diff"]
   new = green bold
