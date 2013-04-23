@@ -7,7 +7,7 @@
 [alias]
   ci = commit
   co = checkout
-  stat = status -sb
+  stat = status --short --branch
   logk = log --graph --oneline --decorate --all
   # glog command like hg's equivalent
   glog = log --graph --oneline --decorate --all
