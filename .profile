@@ -18,6 +18,12 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+
+# Computer-specific, unshareable stuff goes here...
+if [ -f "${HOME}/.profile.local" ] ; then
+  . "${HOME}/.profile.local"
+fi
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -68,7 +74,3 @@ export GOPATH=${HOME}/gocode
 
 unset -f add_to_path
 
-# Computer-specific, unshareable stuff goes here...
-if [ -f "${HOME}/.profile.local" ] ; then
-  . "${HOME}/.profile.local"
-fi
