@@ -7,19 +7,25 @@
 [alias]
   ci = commit
   co = checkout
-  stat = status
+  stat = status -sb
   logk = log --graph --oneline --decorate --all
   # glog command like hg's equivalent
   glog = log --graph --oneline --decorate --all
   # git-meld from <https://github.com/wmanley/git-meld>
   meld = ! git-meld.pl
+  conflicts = diff --name-only --diff-filter=U
+  difftoold = difftool --dir-diff
 [color "diff"]
   new = green bold
   old = red bold
   frag = magenta bold
 [credential]
-	helper = cache
-
+  helper = cache
+[diff]
+  tool = meld
+  mnemonicprefix = true
+[merge]
+  stat = true
 ## The include feature doesn't work until git 1.7.10, which isn't
 ## packaged for Ubuntu 12.04
 # # Store system-specific config (e.g. email) in separate file
