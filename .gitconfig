@@ -14,7 +14,8 @@
   # git-meld from <https://github.com/wmanley/git-meld>
   meld = ! git-meld.pl
   conflicts = diff --name-only --diff-filter=U
-  difftoold = difftool --dir-diff
+  # Use dir-diff with the same name as the original script git-diffall
+  diffall = difftool --dir-diff
 [color "diff"]
   new = green bold
   old = red bold
