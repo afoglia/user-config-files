@@ -1,14 +1,23 @@
-alias ls="ls -F --color=auto"
+if [[ $(uname -s) == "Darwin" ]] ; then
+  # Use CLICOLOR to set color
+  alias ls="ls -F"
+else
+  alias ls="ls -F --color=auto"
+fi
 
 alias bc="bc -l ~/.bc/extensions.bc"
 
-alias ack="ack-grep"
+if command -v ack-grep > /dev/null 2>&1 ; then
+  alias ack="ack-grep"
+fi
 
-alias ack-py="ack-grep --type=python"
+alias ack-py="ack --type=python"
 
 # Keep Nautilus from taking over the desktop
 #
-alias nautilus="nautilus --no-desktop"
+if command -v nautilus > /dev/null 2>&1 ; then
+  alias nautilus="nautilus --no-desktop"
+fi
 
 # Subversion aliases
 #
