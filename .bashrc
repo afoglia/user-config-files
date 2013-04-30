@@ -28,7 +28,9 @@ shopt -s checkwinsize
 
 # If set, the patter "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-shopt -s globstar
+if [[ ${BASH_VERSINFO[0]} -ge 4 ]] ; then
+  shopt -s globstar
+fi
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -62,14 +64,19 @@ if [ -n "$force_color_prompt" ] ; then
     fi
 fi
 
+if [[ $(uname -s) == "Darwin" ]] ; then
+  _sed_extended_regexp_flag="-E"
+else
+  _sed_extended_regexp_flag="-r"
+fi
 
 # Simple function to truncate the path to three containing directories
 trunc_path ()
 {
-    DIR=`pwd | sed -r "s,^${HOME%${USER}}($USER)?,~," `;
-    DIR=`echo $DIR | awk -F / '{ if (NF>4) { print $1"/.../"$(NF-2)"/"$(NF-1)"/"$NF } else { print $0 } }' ` ;
-    echo $DIR;
-    return 0
+  DIR=$(pwd | sed ${_sed_extended_regexp_flag} "s,^${HOME%${USER}}($USER)?,~," );
+  DIR=$(echo $DIR | awk -F / '{ if (NF>4) { print $1"/.../"$(NF-2)"/"$(NF-1)"/"$NF } else { print $0 } }' ) ;
+  echo $DIR;
+  return 0
 }
 
 # Need special version to pass through the exit status so we can get
