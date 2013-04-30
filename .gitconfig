@@ -8,9 +8,9 @@
   ci = commit
   co = checkout
   stat = status --short --branch
-  logk = log --graph --oneline --decorate --all
+  logk = log --graph --oneline --decorate --branches
   # glog command like hg's equivalent
-  glog = log --graph --oneline --decorate --all
+  glog = log --graph --oneline --decorate --branches
   # git-meld from <https://github.com/wmanley/git-meld>
   meld = ! git-meld.pl
   conflicts = diff --name-only --diff-filter=U
