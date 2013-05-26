@@ -27,10 +27,8 @@
   mnemonicprefix = true
 [merge]
   stat = true
-## The include feature doesn't work until git 1.7.10, which isn't
-## packaged for Ubuntu 12.04
-# # Store system-specific config (e.g. email) in separate file
-# [include]
-#   path = ~/.gitconfig.local
-[user]
-  email = afoglia@gmail.com
+# # The include feature doesn't work until git 1.7.10, which isn't
+# # packaged for Ubuntu 12.04
+# Store system-specific config (e.g. email) in separate file
+[include]
+  path = ~/.gitconfig.local
