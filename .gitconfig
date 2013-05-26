@@ -25,6 +25,8 @@
 [diff]
   tool = meld
   mnemonicprefix = true
+[push]
+  default = simple
 [merge]
   stat = true
 # # The include feature doesn't work until git 1.7.10, which isn't
