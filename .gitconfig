@@ -5,6 +5,7 @@
   excludesfile = ~/.gitignore
   editor = "vim +0"
 [alias]
+  aliases = ! git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
   ci = commit
   co = checkout
   stat = status --short --branch
@@ -13,9 +14,11 @@
   glog = log --graph --oneline --decorate --branches
   # git-meld from <https://github.com/wmanley/git-meld>
   meld = ! git-meld.pl
+  # Conflicts alias
   conflicts = diff --name-only --diff-filter=U
   # Use dir-diff with the same name as the original script git-diffall
   diffall = difftool --dir-diff
+  fix = commit --fixup # <commit>
 [color "diff"]
   new = green bold
   old = red bold
@@ -29,6 +32,10 @@
   default = simple
 [merge]
   stat = true
+[rebase]
+  autosquash = true
+[rerere]
+  enabled = 1
 # # The include feature doesn't work until git 1.7.10, which isn't
 # # packaged for Ubuntu 12.04
 # Store system-specific config (e.g. email) in separate file
