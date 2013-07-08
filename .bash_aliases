@@ -97,3 +97,12 @@ pypath () {
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# From <https://coderwall.com/p/psa3ng>
+function vimconflicts() {
+  vim +/"<<<<<<<" $( git diff --name-only --diff-filter=U | xargs )
+}
+
+# Site-specific stuff not to be shared cross-system
+if [[ -f ${HOME}/.bash_aliases.local ]] ; then
+  . ${HOME}/.bash_aliases.local
+fi
