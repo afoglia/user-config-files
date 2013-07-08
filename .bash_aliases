@@ -1,6 +1,9 @@
 if [[ $(uname -s) == "Darwin" ]] ; then
   # Use CLICOLOR to set color
   alias ls="ls -F"
+  if ! hash md5sum 2> /dev/null && hash openssl 2> /dev/null ; then
+    alias md5sum="openssl md5"
+  fi
 else
   alias ls="ls -F --color=auto"
 fi
