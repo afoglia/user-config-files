@@ -105,6 +105,15 @@ function vimconflicts() {
   vim +/"<<<<<<<" $( git diff --name-only --diff-filter=U | xargs )
 }
 
+# Kill all Chrome tab rendering processes
+kill-chrome-renderers () {
+  for PID in $(ps aux | grep "Chrome Helper --type=renderer" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
+    echo $PID
+    kill ${PID}
+  done
+}
+
+
 # Site-specific stuff not to be shared cross-system
 if [[ -f ${HOME}/.bash_aliases.local ]] ; then
   . ${HOME}/.bash_aliases.local
