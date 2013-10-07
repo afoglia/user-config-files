@@ -1,0 +1,9 @@
+[extensions]
+color =
+graphlog =
+mq =
+pager =
+rebase =
+record =
+[pager]
+pager = less
