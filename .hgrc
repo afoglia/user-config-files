@@ -10,3 +10,5 @@ rebase =
 record =
 [pager]
 pager = less
+
+%include ~/.hgrc.local
