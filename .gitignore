@@ -9,7 +9,8 @@
 *.so
 *.lo
 *.la
-
-# Other ignores
 *.pyo
 *.pyc
+
+# Stored annotate stdout/stderr logs
+*.annotate
