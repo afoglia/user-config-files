@@ -107,7 +107,7 @@ function vimconflicts() {
 
 # Kill all Chrome tab rendering processes
 kill-chrome-renderers () {
-  for PID in $(ps aux | grep "Chrome Helper --type=renderer" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
+  for PID in $(ps aux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper) --type=renderer" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
     echo $PID
     kill ${PID}
   done
