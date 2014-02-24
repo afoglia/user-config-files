@@ -11,14 +11,19 @@
   stat = status --short --branch
   logk = log --graph --oneline --decorate --branches
   # glog command like hg's equivalent
-  glog = log --graph --oneline --decorate --branches
+  glog = log --graph --oneline --decorate
   # git-meld from <https://github.com/wmanley/git-meld>
   meld = ! git-meld.pl
   # Conflicts alias
   conflicts = diff --name-only --diff-filter=U
+  # This might be faster:
+  # conflicts = !git ls-files -u | cut -f 2 | sort -u
   # Use dir-diff with the same name as the original script git-diffall
   diffall = difftool --dir-diff
   fix = commit --fixup # <commit>
+  # This does the entire tree, when I would like it if I could limit it
+  # to a directory...
+  untracked = ls-files -o --exclude-standard --directory
 [color "diff"]
   new = green bold
   old = red bold
