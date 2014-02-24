@@ -32,6 +32,9 @@ if [[ ${BASH_VERSINFO[0]} -ge 4 ]] ; then
   shopt -s globstar
 fi
 
+# Extended globbing
+shopt -s extglob
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -70,10 +73,13 @@ else
   _sed_extended_regexp_flag="-r"
 fi
 
+
 # Simple function to truncate the path to three containing directories
 trunc_path ()
 {
-  DIR=$(pwd | sed ${_sed_extended_regexp_flag} "s,^${HOME%${USER}}($USER)?,~," );
+  # DIR=$(pwd | sed ${_sed_extended_regexp_flag} "s,^${HOME%${USER}}($USER)?,~," );
+  # Requires extglob shell options
+  DIR=${PWD/#${HOME%${USER}}?(${USER})/\~}
   DIR=$(echo $DIR | awk -F / '{ if (NF>4) { print $1"/.../"$(NF-2)"/"$(NF-1)"/"$NF } else { print $0 } }' ) ;
   echo $DIR;
   return 0
