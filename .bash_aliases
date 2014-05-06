@@ -10,9 +10,15 @@ fi
 
 alias bc="bc -l ~/.bc/extensions.bc"
 
+# Undo debian/ubuntu's renaming of these utilities
 if command -v ack-grep > /dev/null 2>&1 ; then
   alias ack="ack-grep"
 fi
+
+if command -v annotate-output > /dev/null 2>&1 ; then
+  alias annotate="annotate-output"
+fi
+
 
 alias ack-py="ack --type=python"
 
