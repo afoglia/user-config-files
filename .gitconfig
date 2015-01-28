@@ -4,6 +4,8 @@
   pager = less -FX
   excludesfile = ~/.gitignore
   editor = "vim +0"
+  protectHFS = true
+  protectNTFS = true
 [alias]
   aliases = ! git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
   ci = commit
@@ -41,6 +43,8 @@
   autosquash = true
 [rerere]
   enabled = 1
+[transfer]
+  fsckObjects = true
 # # The include feature doesn't work until git 1.7.10, which isn't
 # # packaged for Ubuntu 12.04
 # Store system-specific config (e.g. email) in separate file
