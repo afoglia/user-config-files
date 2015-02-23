@@ -22,6 +22,9 @@ HISTFILESIZE=20000
 # Add timestamp to history
 export HISTTIMEFORMAT='%F %T >> '
 
+# Keep carriage returns in history
+shopt -s lithist
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
