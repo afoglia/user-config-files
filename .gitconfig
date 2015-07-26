@@ -41,6 +41,8 @@
   autosquash = true
 [rerere]
   enabled = 1
+[init]
+  templatedir = ~/.git_template
 # # The include feature doesn't work until git 1.7.10, which isn't
 # # packaged for Ubuntu 12.04
 # Store system-specific config (e.g. email) in separate file
