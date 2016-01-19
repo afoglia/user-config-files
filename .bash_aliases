@@ -49,7 +49,14 @@ h5diff-no-nan () {
 # set dpi to 75 to match NX
 alias vncserver-ajf="vncserver -geometry 1880x1130" # -dpi 75"
 
+#
 # Emacs
+#
+# On OSX, use Emacs.app
+if [ -x /Applications/Emacs.app/Contents/MacOS/bin/emacsclient ] ; then
+  alias emacsclient=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient
+fi
+
 # Use server/client mode
 # Clients don't need to wait for server to finish.  (I leave my EDITOR set to
 # vi for those simple, quick edits.
