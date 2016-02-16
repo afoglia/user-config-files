@@ -4,6 +4,8 @@
   pager = less -FX
   excludesfile = ~/.gitignore
   editor = "vim +0"
+  protectHFS = true
+  protectNTFS = true
 [alias]
   aliases = ! git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
   ci = commit
@@ -12,6 +14,8 @@
   logk = log --graph --oneline --decorate --branches
   # glog command like hg's equivalent
   glog = log --graph --oneline --decorate
+  # Branch topology graph
+  topo = log --graph --oneline --decorate --branches --simplify-by-decoration
   # git-meld from <https://github.com/wmanley/git-meld>
   meld = ! git-meld.pl
   # Conflicts alias
@@ -43,6 +47,8 @@
   enabled = 1
 [init]
   templatedir = ~/.git_template
+[transfer]
+  fsckObjects = true
 # # The include feature doesn't work until git 1.7.10, which isn't
 # # packaged for Ubuntu 12.04
 # Store system-specific config (e.g. email) in separate file

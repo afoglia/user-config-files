@@ -5,3 +5,4 @@
 --type-set=go=.go
 --type-set=gyp=.gyp,.gypi
 --type-set=ninja=.ninja
+--type-set=proto=.proto
