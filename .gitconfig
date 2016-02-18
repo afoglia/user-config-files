@@ -41,6 +41,7 @@
   stat = true
 [rebase]
   autosquash = true
+  missingCommitsCheck = warn
 [rerere]
   enabled = 1
 [transfer]
