@@ -14,6 +14,8 @@
   logk = log --graph --oneline --decorate --branches
   # glog command like hg's equivalent
   glog = log --graph --oneline --decorate
+  # Branch topology graph
+  topo = log --graph --oneline --decorate --branches --simplify-by-decoration
   # git-meld from <https://github.com/wmanley/git-meld>
   meld = ! git-meld.pl
   # Conflicts alias
