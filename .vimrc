@@ -1,20 +1,20 @@
-" use spaces instead of tabs
+" Use spaces instead of tabs
 set expandtab
 
 set tabstop=3
 
-" load indent files for specific filetypes
+" Load indent files for specific filetypes
 filetype indent on
-"" load indent and plugin files for specific filetypes
+"" Load indent and plugin files for specific filetypes
 "filetype plugin indent on
 
-" turn on color highlighting
+" Turn on color highlighting
 syntax on
 
-" use dark background
+" Use dark background
 set background=dark
 
-"" use desert colorscheme
+"" Use desert colorscheme
 "colorscheme desert
 "colorscheme darkerdesert
 
