@@ -1,7 +1,16 @@
+" Status bar
+set laststatus=2
+set ruler
+
+" Tab completion
+set wildmenu
+
 " Use spaces instead of tabs
 set expandtab
 
 set tabstop=2
+
+set smarttab
 
 " Load indent files for specific filetypes
 filetype indent on
