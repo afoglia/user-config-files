@@ -1,7 +1,7 @@
 " Use spaces instead of tabs
 set expandtab
 
-set tabstop=3
+set tabstop=2
 
 " Load indent files for specific filetypes
 filetype indent on
