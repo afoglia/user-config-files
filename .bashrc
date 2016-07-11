@@ -159,15 +159,15 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-#echo "$(date): Setting up aliases"
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+# Set python to use with virtualenvwrapper
+#
+# Even if we use a custom python, use the system's python and virtualenv
+# command to build virtualenvs.
+#
+# This must come before /etc/bash_completion, because that's when
+# virtualenvwrapper.sh gets sourced in Ubuntu's packaging.
+export VIRTUALENVWRAPPER_PYTHON=$(which python)
+export VIRTUALENVWRAPPER_VIRTUALENV=$(which virtualenv)
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -186,6 +186,16 @@ fi
 export WORKON_HOME=${HOME}/.virtualenvs
 if [ -f /usr/local/bin/virtualenvwrapper_bashrc ] ; then
     . /usr/local/bin/virtualenvwrapper_bashrc
+fi
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+#echo "$(date): Setting up aliases"
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
 
 #echo "$(date): Exitting .bashrc"
