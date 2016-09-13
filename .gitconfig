@@ -43,8 +43,11 @@
   stat = true
 [rebase]
   autosquash = true
+  missingCommitsCheck = warn
 [rerere]
   enabled = 1
+[init]
+  templatedir = ~/.git_template
 [transfer]
   fsckObjects = true
 # # The include feature doesn't work until git 1.7.10, which isn't
