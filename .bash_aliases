@@ -120,12 +120,19 @@ function vimconflicts() {
 
 # Kill all Chrome tab rendering processes
 kill-chrome-renderers () {
-  for PID in $(ps aux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper) --type=renderer" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
-    echo $PID
+  for PID in $(ps ux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper) --type=renderer" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
+    echo ${PID}
     kill ${PID}
   done
 }
 
+# Kill Chrome GPU cpu hogger
+kill-chrome-gpu () {
+  for PID in $(ps ux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper) --type=gpu-process" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
+    echo ${PID}
+    kill ${PID}
+  done
+}
 
 # Site-specific stuff not to be shared cross-system
 if [[ -f ${HOME}/.bash_aliases.local ]] ; then
