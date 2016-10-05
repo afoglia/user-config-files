@@ -28,6 +28,9 @@
   # This does the entire tree, when I would like it if I could limit it
   # to a directory...
   untracked = ls-files -o --exclude-standard --directory
+  # Get current branch, if at tip of branch. Otherwise, just prints HEAD
+  # (Could replace by parsing .git/HEAD
+  pwb = rev-parse --abbrev-ref HEAD
 [color "diff"]
   new = green bold
   old = red bold

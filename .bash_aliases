@@ -120,12 +120,47 @@ function vimconflicts() {
 
 # Kill all Chrome tab rendering processes
 kill-chrome-renderers () {
-  for PID in $(ps aux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper) --type=renderer" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
-    echo $PID
+  for PID in $(ps ux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper) --type=renderer" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
+    echo ${PID}
     kill ${PID}
   done
 }
 
+# Kill Chrome GPU cpu hogger
+kill-chrome-gpu () {
+  for PID in $(ps ux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper) --type=gpu-process" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
+    echo ${PID}
+    kill ${PID}
+  done
+}
+
+# cd command that stays within git repo
+git-cd () {
+  if [[ "$1" == "--help" ]]; then
+    echo "cd within a git repo"
+    return 0
+  fi
+  if [[ -z "$1" || "$1" == /* ]]; then
+    cd "$(git-root)$1"
+  else
+    cd $1
+  fi
+}
+
+_git-cd () {
+  local curr
+  COMPREPLY=()
+  curr="${COMP_WORDS[COMP_CWORD]}"
+  if [[ -z "${curr}" || "${curr:0:1}" != "/" ]] ; then
+    COMPREPLY=( $(compgen -d ${curr}) )
+  else
+    local git_root
+    git_root="$(git root)"
+    COMPREPLY=( $( for dyr in $(compgen -d ${git_root}${curr} ) ; do echo ${dyr:${#git_root}}/ ; done ) )
+  fi
+}
+
+complete -o nospace -F _git-cd git-cd
 
 # Site-specific stuff not to be shared cross-system
 if [[ -f ${HOME}/.bash_aliases.local ]] ; then
