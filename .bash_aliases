@@ -108,6 +108,8 @@ pypath () {
   python $* -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"
 }
 
+alias lsvirtualenv="lsvirtualenv -b"
+
 # (from Ubuntu)
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
