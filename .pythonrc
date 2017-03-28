@@ -1,0 +1,10 @@
+from __future__ import print_function
+
+# Enable syntax completion
+try:
+  import readline
+except ImportError:
+  print("readline module not available")
+else:
+  import rlcompleter
+  readline.parse_and_bind("tab: complete")

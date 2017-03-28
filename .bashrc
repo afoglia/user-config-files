@@ -159,6 +159,9 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+# Configure PYTHONSTARTUP file
+export PYTHONSTARTUP=~/.pythonrc
+
 # Set python to use with virtualenvwrapper
 #
 # Even if we use a custom python, use the system's python and virtualenv
