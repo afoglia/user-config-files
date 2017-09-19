@@ -10,17 +10,32 @@ fi
 
 alias bc="bc -l ~/.bc/extensions.bc"
 
+if command -v annotate-output > /dev/null 2>&1 ; then
+  alias annotate="annotate-output"
+fi
+
+#
+# Search tools
+#
+
 # Undo debian/ubuntu's renaming of these utilities
 if command -v ack-grep > /dev/null 2>&1 ; then
   alias ack="ack-grep"
 fi
 
-if command -v annotate-output > /dev/null 2>&1 ; then
-  alias annotate="annotate-output"
-fi
-
-
+# Type-specific alias for ack and python
 alias ack-py="ack --type=python"
+
+# Type-specific aliases for ag
+#
+# Needed because old versions of ag don't support file types. (Newer versions
+# might, but it's not obvious I can do custom types like in ack.)
+alias ag-go="ag --file-search-regex \.go\?\$"
+alias ag-gyp="ag --file-search-regex \.gypi\?\$"
+alias ag-ninja="ag --file-search-regex \.ninja\?\$"
+alias ag-py="ag --file-search-regex \.py\$"
+alias ag-proto="ag --file-search-regex \.proto\$"
+
 
 # Keep Nautilus from taking over the desktop
 #
