@@ -8,7 +8,17 @@ else
   alias ls="ls -F --color=auto"
 fi
 
-alias bc="bc -l ~/.bc/extensions.bc"
+# Use bc extensions from
+# http://www.terminally-incoherent.com/blog/reference/bc-extensions/
+# if downloaded
+if [[ -f "${HOME}/.bc/extensions.bc" ]]; then
+  alias bc="bc -l ~/.bc/extensions.bc"
+else
+  bc () {
+    echo "Note: Extensions not installed" >&2
+    command bc -l "$@"
+  }
+fi
 
 if command -v annotate-output > /dev/null 2>&1 ; then
   alias annotate="annotate-output"
