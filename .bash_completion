@@ -1,0 +1,4 @@
+# Complete printenv with environment variables
+# TODO: Improve this to also handle options, and figure out why the default is
+# "complete -F _minimal printenv".
+complete -e printenv
