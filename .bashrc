@@ -205,6 +205,14 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# Other local stuff that doesn't make sense to share across machines
+
+if [ -f ~/.bashrc.local ]; then
+  . ~/.bashrc.local
+fi
+
+# TODO: Refactor into a bashrc.d/ directory layout, and put all the
+# color prompt stuff together.
 unset color_prompt force_color_prompt
 
 #echo "$(date): Exitting .bashrc"
