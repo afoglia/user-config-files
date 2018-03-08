@@ -106,7 +106,8 @@ if [ "$color_prompt" = yes ] ; then
     # Define color codes
     COLOR_BOLD="\033[1m"
     COLOR_RED="\033[01;31m"
-    COLOR_GREEN="\e[00;32m"
+    COLOR_GREEN="\033[00;32m"
+    COLOR_YELLOW="\033[00;33m"
     COLOR_BLUE="\033[01;34m"
     COLOR_CYAN="\033[00;36m"
     COLOR_OFF="\033[00m"
