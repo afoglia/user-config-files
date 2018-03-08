@@ -67,6 +67,8 @@
 [rebase]
   autosquash = true
   missingCommitsCheck = warn
+[receive]
+  denyCurrentBranch = updateInstead
 [rerere]
   enabled = 1
 [init]
