@@ -120,7 +120,14 @@ function emacsc () {
 # $ config-vc pull origin master
 alias config-vc='git --git-dir=$HOME/.config.git/ --work-tree=$HOME'
 if [ -f /etc/bash_completion ] ; then
-  complete -o default -o nospace -F _git config-vc
+  if $(type -t _git > /dev/null) ; then
+    complete -o default -o nospace -F _git config-vc
+  elif $(type -t _xfunc > /dev/null) ; then
+    # Bash kindly created a dynamic loading framework for completions,
+    # but with no documentation or hooks on how to enable it for yourself.
+    # https://github.com/scop/bash-completion/issues/49
+    _xfunc git __git_complete config-vc __git_main
+  fi
 fi
 
 
