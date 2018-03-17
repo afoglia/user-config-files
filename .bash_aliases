@@ -12,7 +12,9 @@ fi
 # http://www.terminally-incoherent.com/blog/reference/bc-extensions/
 # if downloaded
 if [[ -f "${HOME}/.bc/extensions.bc" ]]; then
-  alias bc="bc -l ~/.bc/extensions.bc"
+  bc () {
+    command bc -l ~/.bc/extensions.bc
+  }
 else
   bc () {
     echo "Note: Extensions not installed" >&2
