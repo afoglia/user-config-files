@@ -29,7 +29,7 @@ shopt -s lithist
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# If set, the patter "**" used in a pathname expansion context will
+# If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 if [[ ${BASH_VERSINFO[0]} -ge 4 ]] ; then
   shopt -s globstar

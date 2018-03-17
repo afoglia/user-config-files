@@ -31,6 +31,26 @@
   # Get current branch, if at tip of branch. Otherwise, just prints HEAD
   # (Could replace by parsing .git/HEAD
   pwb = rev-parse --abbrev-ref HEAD
+
+  # Aliases for grepping by file type.
+  # Format taken from https://stackoverflow.com/a/39523506/79513
+  grep-go = "! git grep \"$@\" *.go #"
+  grep-gyp = "! git grep \"$@\" *.gyp *.gypi #"
+  grep-ninja = "! git grep \"$@\" *.ninja #"
+  grep-py = "! git grep \"$@\" *.py #"
+  grep-proto = "! git grep \"$@\" *.proto #"
+
+  # Styled like ack
+  # Taken from https://stackoverflow.com/a/39583968/79513
+  ack = "! git -c color.grep.linenumber=\"bold yellow\" \
+               -c color.grep.filename=\"bold green\" \
+               -c color.grep.match=\"reverse yellow\" \
+               grep --break --heading --line-number"
+  ack-go = "! git ack \"$@\" *.go #"
+  ack-gyp = "! git ack \"$@\" *.gyp *.gypi #"
+  ack-ninja = "! git ack \"$@\" *.ninja #"
+  ack-py = "! git ack \"$@\" *.py #"
+  ack-proto = "! git ack \"$@\" *.proto #"
 [color "diff"]
   new = green bold
   old = red bold
