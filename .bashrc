@@ -104,25 +104,36 @@ fi
 
 if [ "$color_prompt" = yes ] ; then
     # Define color codes
-    COLOR_BOLD="\033[1m"
-    COLOR_RED="\033[01;31m"
-    COLOR_GREEN="\033[00;32m"
-    COLOR_YELLOW="\033[00;33m"
-    COLOR_BLUE="\033[01;34m"
-    COLOR_CYAN="\033[00;36m"
-    COLOR_OFF="\033[00m"
+    COLOR_BOLD="$(tput bold)"
+    COLOR_RED="$(tput setaf 1)"
+    COLOR_GREEN="$(tput setaf 2)"
+    COLOR_YELLOW="$(tput setaf 3)"
+    COLOR_BLUE="$(tput bold)$(tput setaf 4)"
+    COLOR_CYAN="$(tput setaf 6)"
+    COLOR_OFF="$(tput sgr0)"
 
     # Define prompts
 #    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     PS1="${debian_chroot:+($debian_chroot)}\[${COLOR_RED}\]\$(echo \$? | sed -e 's/^0$//' -e 's/^\(.\)$/*\1*/' )\[${COLOR_GREEN}\]\u@\h\[${COLOR_OFF}\]:\[${COLOR_BLUE}\]\$(ps_trunc_path)\[${COLOR_OFF}\]:\[${COLOR_CYAN}\]\!\[${COLOR_OFF}\]\$ "
 
-    export LESS_TERMCAP_mb=$'\E[01;33m'      # begin blinking
-    export LESS_TERMCAP_md=$'\E[01;33m'      # begin bold
-    export LESS_TERMCAP_me=$'\E[0m'          # end mode
-    export LESS_TERMCAP_se=$'\E[0m'          # end standout-mode
-    export LESS_TERMCAP_so=$'\E[01;44;33m'   # begin standout-mode - info box
-    export LESS_TERMCAP_ue=$'\E[0m'          # end underline
-    export LESS_TERMCAP_us=$'\E[033m'        # begin underline
+    # Termcap definitions used by less.
+    # See https://unix.stackexchange.com/a/108840
+    # and https://www.gnu.org/software/termutils/manual/termcap-1.3/html_chapter/termcap_4.html
+
+    # begin blinking
+    export LESS_TERMCAP_mb="${COLOR_BOLD}${COLOR_YELLOW}"
+    # begin bold
+    export LESS_TERMCAP_md="${COLOR_BOLD}${COLOR_YELLOW}"
+    # end mode
+    export LESS_TERMCAP_me="${COLOR_OFF}"
+    # end standout-mode
+    export LESS_TERMCAP_se="${COLOR_OFF}"
+    # begin standout-mode - info box
+    export LESS_TERMCAP_so="${COLOR_BOLD}$(tput setab 4)${COLOR_YELLOW}"
+    # end underline
+    export LESS_TERMCAP_ue="${COLOR_OFF}"
+    # begin underline
+    export LESS_TERMCAP_us="${COLOR_YELLOW}"
 
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w:\!\$ '
