@@ -177,7 +177,8 @@ git-cd () {
     return 0
   fi
   if [[ -z "$1" || "$1" == /* ]]; then
-    cd "$(git-root)$1"
+    local git_root
+    git_root="$(git-root)" && cd "${git_root}$1"
   else
     cd $1
   fi
