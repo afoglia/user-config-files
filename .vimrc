@@ -23,16 +23,32 @@ syntax on
 " Use dark background
 set background=dark
 
-"" Use desert colorscheme
-"colorscheme desert
-"colorscheme darkerdesert
+"" Determine colorscheme
+""
+"" Logic taken from:
+"" https://vi.stackexchange.com/questions/3397/how-do-i-conditionally-set-colorscheme
+"" Scoping taken from:
+"" http://learnvimscriptthehardway.stevelosh.com/chapters/20.html
 
-"colorscheme moria
-"colorscheme oceanblack
-
+"" Customization for ps_color. (No harm setting it here.)
 let psc_cterm_transparent=1
-colorscheme ps_color
-"colorscheme peaksea
+
+for s:colorscheme in [  "peaksea",
+                      \ "desert",
+                      \ "ps_color",
+                      \ "darkerdesert",
+                      \ "moria",
+                      \ "oceanblack"]
+  "" TODO: Figure out how to set this to only print in a "debug" mode
+  ":echom "Looking for colorscheme ".s:colorscheme
+  if globpath(&runtimepath, "colors/".s:colorscheme.".vim", 1) !=# ""
+    "" TODO: Put this in a try-catch
+    "" https://stackoverflow.com/questions/5698284/in-my-vimrc-how-can-i-check-for-the-existence-of-a-color-scheme
+    exe "colorscheme" s:colorscheme
+    break
+  endif
+endfor
+
 
 " Doesn't seem to work
 " " Force background to be black (already grey from the terminal settings)
