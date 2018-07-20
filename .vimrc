@@ -20,6 +20,9 @@ filetype indent on
 " Turn on color highlighting
 syntax on
 
+"" Allow mouse use in normal and visual mode
+set mouse=nv
+
 " Use dark background
 set background=dark
 
