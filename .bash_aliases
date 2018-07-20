@@ -11,16 +11,14 @@ fi
 # Use bc extensions from
 # http://www.terminally-incoherent.com/blog/reference/bc-extensions/
 # if downloaded
-if [[ -f "${HOME}/.bc/extensions.bc" ]]; then
-  bc () {
-    command bc -l ~/.bc/extensions.bc
-  }
-else
-  bc () {
+bc () {
+  if [[ -f "${HOME}/.bc/extensions.bc" ]]; then
+    command bc -l ~/.bc/extensions.bc "$@"
+  else
     echo "Note: Extensions not installed" >&2
     command bc -l "$@"
-  }
-fi
+  fi
+}
 
 if command -v annotate-output > /dev/null 2>&1 ; then
   alias annotate="annotate-output"
