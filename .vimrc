@@ -47,7 +47,7 @@ for s:colorscheme in [  "peaksea",
   if globpath(&runtimepath, "colors/".s:colorscheme.".vim", 1) !=# ""
     "" TODO: Put this in a try-catch
     "" https://stackoverflow.com/questions/5698284/in-my-vimrc-how-can-i-check-for-the-existence-of-a-color-scheme
-    exe "colorscheme" s:colorscheme
+    execute "colorscheme" s:colorscheme
     break
   endif
 endfor
