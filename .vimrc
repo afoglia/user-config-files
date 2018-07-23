@@ -23,6 +23,9 @@ syntax on
 "" Allow mouse use in normal and visual mode
 set mouse=nv
 
+" Incremental search
+set incsearch
+
 " Use dark background
 set background=dark
 
