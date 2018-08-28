@@ -1,10 +1,31 @@
 from __future__ import print_function
 
 # Enable syntax completion
+
+# TODO: Add fallback to pyreadline, if available. Not simple, as pyreadline
+# includes it's own readline
+# module. https://pythonhosted.org/pyreadline/introduction.html#conflicts
+readline = None
 try:
   import readline
-except ImportError:
-  print("readline module not available")
-else:
+except ImportError as e:
+  print("Unable to load default readline: %s" % e)
+  try:
+    # Fallback to gnureadline, if installed.
+    # https://pypi.org/project/gnureadline/
+    import gnureadline as readline
+  except ImportError:
+    print("readline module not available")
+  else:
+    print("Using gnureadline")
+
+if readline:
   import rlcompleter
+  if not readline.get_completer():
+    # Will not be set if not using standard readline package.
+    readline.set_completer(rlcompleter.Completer().complete)
   readline.parse_and_bind("tab: complete")
+
+  del rlcompleter
+
+del readline
