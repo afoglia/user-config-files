@@ -24,6 +24,9 @@ if command -v annotate-output > /dev/null 2>&1 ; then
   alias annotate="annotate-output"
 fi
 
+# TODO: Replace with function that can re-nice processes, or create rerealnice
+alias realnice="nice -n 19 ionice -c2 -n7"
+
 #
 # Search tools
 #
