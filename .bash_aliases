@@ -26,6 +26,7 @@ fi
 
 # TODO: Replace with function that can re-nice processes, or create rerealnice
 alias realnice="nice -n 19 ionice -c2 -n7"
+complete -F _command realnice
 
 #
 # Search tools
