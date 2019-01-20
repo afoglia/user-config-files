@@ -172,6 +172,20 @@ kill-chrome-gpu () {
   done
 }
 
+# Mac specific
+if [[ $(uname -s) == "Darwin" ]] ; then
+  # Add alias to set-up and tear down permissions required for brew
+  brew () {
+    echo "Setting /usr/local directories as world-writeable"
+    sudo chmod o+w /usr/local/{bin,etc,sbin,share,share/doc}
+    command brew $@
+    EXITVALUE=$?
+    echo "Resetting permissions of /usr/local directories"
+    sudo chmod o-w /usr/local/{bin,etc,sbin,share,share/doc}
+    return "${EXITVALUE}"
+  }
+fi
+
 # cd command that stays within git repo
 git-cd () {
   if [[ "$1" == "--help" ]]; then
