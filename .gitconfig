@@ -29,7 +29,7 @@
   # to a directory...
   untracked = ls-files -o --exclude-standard --directory
   # Get current branch, if at tip of branch. Otherwise, just prints HEAD
-  # (Could replace by parsing .git/HEAD
+  # (Could replace by parsing .git/HEAD)
   pwb = rev-parse --abbrev-ref HEAD
 
   # Aliases for grepping by file type.
@@ -75,8 +75,16 @@
   templatedir = ~/.git_template
 [transfer]
   fsckObjects = true
-# # The include feature doesn't work until git 1.7.10, which isn't
-# # packaged for Ubuntu 12.04
-# Store system-specific config (e.g. email) in separate file
+
+# Store system-specific config (e.g. work/project email) in separate file
 [include]
-  path = ~/.gitconfig.local
+  path = ~/.gitconfig.d/local
+
+# Separate gitconfig that sets my email/name/etc. for commits in my
+# user config repo. Not checked in for privacy from any scrapers.
+[includeIf "gitdir:~/.config.git"]
+  path = ~/.gitconfig.d/shared_config_repo
+
+# Hack to do OSX-specific configurations
+[includeIf "gitdir:/Users"]
+  path = ~/.gitconfig.d/osx
