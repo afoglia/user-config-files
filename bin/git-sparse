@@ -1,0 +1,40 @@
+#!/bin/bash
+
+usage () {
+  cat <<EOF
+${0##*/} add <paths>...    Add paths to sparse list. (Not yet implemented.)
+${0##*/} list              List sparse-checkout expressions.
+${0##*/} edit              Edit sparse-checkout expressions.
+EOF
+}
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+  usage
+  exit
+fi
+
+readonly GITDIR="$(git rev-parse --git-dir)"
+if [[ -z "${GITDIR}" ]]; then
+  exit 1
+fi
+
+if [[ "$1" == "list" ]]; then
+  # Use git pager?
+  cat "${GITDIR}/info/sparse-checkout"
+fi
+
+git-editor () {
+  if [[ -z "${GIT_EDITOR}" ]]; then
+    GIT_EDITOR="$(git var GIT_EDITOR)"
+  fi
+  eval "${GIT_EDITOR}" "$@"
+}
+
+if [[ "$1" == "edit" ]]; then
+  git-editor "${GITDIR}/info/sparse-checkout"
+  echo "Run \"git read-tree -mu HEAD\" to update working tree"
+fi
+
+# TODO: Add "add" command. Or maybe call it "whitelist" and
+# "blacklist" to make it clearer whether the result is added to the
+# checkout, or removed.

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Taken from git-sh-setup.sh
+# <https://github.com/git/git/blob/master/git-sh-setup.sh> and converted from a
+# function to a script so it can be called easily from other scripts.
+
+if [[ -z "${GIT_EDITOR}" ]]; then
+  GIT_EDITOR="$(git var GIT_EDITOR)"
+fi
+eval "${GIT_EDITOR}" "$@"
