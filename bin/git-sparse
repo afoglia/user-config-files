@@ -2,6 +2,7 @@
 
 usage () {
   cat <<EOF
+${0##*/} enable            Enable sparse checkout.
 ${0##*/} add <paths>...    Add paths to sparse list. (Not yet implemented.)
 ${0##*/} list              List sparse-checkout expressions.
 ${0##*/} edit              Edit sparse-checkout expressions.
@@ -18,22 +19,26 @@ if [[ -z "${GITDIR}" ]]; then
   exit 1
 fi
 
-if [[ "$1" == "list" ]]; then
-  # Use git pager?
-  cat "${GITDIR}/info/sparse-checkout"
-fi
+case "$1" in
+  enable)
+    git config core.sparseCheckout true
+    ;;
 
-git-editor () {
-  if [[ -z "${GIT_EDITOR}" ]]; then
-    GIT_EDITOR="$(git var GIT_EDITOR)"
-  fi
-  eval "${GIT_EDITOR}" "$@"
-}
+  list)
+    # Use git pager?
+    cat "${GITDIR}/info/sparse-checkout"
+    ;;
 
-if [[ "$1" == "edit" ]]; then
-  git-editor "${GITDIR}/info/sparse-checkout"
-  echo "Run \"git read-tree -mu HEAD\" to update working tree"
-fi
+  edit)
+    git-editor "${GITDIR}/info/sparse-checkout"
+    echo "Run \"git read-tree -mu HEAD\" to update working tree"
+    ;;
+
+  *)
+    echo "Unrecognized command $1"
+    ;;
+
+esac
 
 # TODO: Add "add" command. Or maybe call it "whitelist" and
 # "blacklist" to make it clearer whether the result is added to the
