@@ -24,6 +24,11 @@ if [ -f "${HOME}/.profile.local" ]; then
   . "${HOME}/.profile.local"
 fi
 
+# Location of user-installed python scripts on Mac
+if [ -d "${HOME}/Library/Python/2.7/bin" ]; then
+  PATH="${HOME}/Library/Python/2.7/bin:${PATH}"
+fi
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"

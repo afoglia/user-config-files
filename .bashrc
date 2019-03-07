@@ -208,8 +208,11 @@ fi
 # Virtualenvwrapper shell scripts
 #echo "$(date): Setting up virtualenvs"
 export WORKON_HOME=${HOME}/.virtualenvs
-if [ -f /usr/local/bin/virtualenvwrapper_bashrc ] ; then
-    . /usr/local/bin/virtualenvwrapper_bashrc
+if [[ -f /usr/local/bin/virtualenvwrapper_bashrc ]]; then
+  . /usr/local/bin/virtualenvwrapper_bashrc
+elif [[ -f "${HOME}/Library/Python/2.7/bin/virtualenvwrapper.sh" ]]; then
+  # Location of virtualenvwrapper on osx.
+  . "${HOME}/Library/Python/2.7/bin/virtualenvwrapper.sh"
 fi
 
 # Alias definitions.
