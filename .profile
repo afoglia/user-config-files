@@ -20,7 +20,7 @@ fi
 
 
 # Computer-specific, unshareable stuff goes here...
-if [ -f "${HOME}/.profile.local" ] ; then
+if [ -f "${HOME}/.profile.local" ]; then
   . "${HOME}/.profile.local"
 fi
 
