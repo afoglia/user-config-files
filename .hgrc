@@ -3,12 +3,22 @@ git = True
 
 [extensions]
 color =
+extdiff =
 graphlog =
 mq =
 pager =
+purge =
 rebase =
 record =
+
+[extdiff]
+cmd.meld =
+cmd.diffall = meld
+
 [pager]
 pager = less
+
+[alias]
+colors = debugcolor
 
 %include ~/.hgrc.local
