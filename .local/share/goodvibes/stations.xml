@@ -47,4 +47,8 @@
     <uri>https://kera-ice.streamguys1.com/keralive.m3u</uri>
     <name>KERA</name>
   </Station>
+  <Station>
+    <uri>https://kcrw.streamguys1.com/kcrw_192k_mp3_e24?listenerid=09d2a679e958b15701e075a534ab9de3&amp;awparams=companionAds%3Atrue</uri>
+    <name>KCRW Eclectic 24</name>
+  </Station>
 </Stations>
