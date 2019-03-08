@@ -64,6 +64,7 @@
   default = simple
 [merge]
   stat = true
+  conflictstyle = diff3
 [rebase]
   autosquash = true
   missingCommitsCheck = warn
