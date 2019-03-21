@@ -41,14 +41,11 @@ fi
 alias ack-py="ack --type=python"
 
 # Type-specific aliases for ag
-#
-# Needed because old versions of ag don't support file types. (Newer versions
-# might, but it's not obvious I can do custom types like in ack.)
-alias ag-go="ag --file-search-regex \.go\?\$"
+alias ag-go="ag --go"
 alias ag-gyp="ag --file-search-regex \.gypi\?\$"
-alias ag-ninja="ag --file-search-regex \.ninja\?\$"
-alias ag-py="ag --file-search-regex \.py\$"
-alias ag-proto="ag --file-search-regex \.proto\$"
+alias ag-ninja="ag --file-search-regex \.ninja\$"
+alias ag-py="ag --python"
+alias ag-proto="ag --proto"
 
 
 # Keep Nautilus from taking over the desktop
