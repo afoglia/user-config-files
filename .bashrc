@@ -215,6 +215,11 @@ elif [[ -f "${HOME}/Library/Python/2.7/bin/virtualenvwrapper.sh" ]]; then
   . "${HOME}/Library/Python/2.7/bin/virtualenvwrapper.sh"
 fi
 
+
+# Ripgrep
+export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgreprc"
+
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.

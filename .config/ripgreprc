@@ -1,0 +1,2 @@
+--type-add=gyp:*.{gyp,gypi}
+--type-add=ninja:*.ninja
