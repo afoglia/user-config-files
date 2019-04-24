@@ -24,7 +24,12 @@ if readline:
   if not readline.get_completer():
     # Will not be set if not using standard readline package.
     readline.set_completer(rlcompleter.Completer().complete)
-  readline.parse_and_bind("tab: complete")
+  if "libedit" in readline.__doc__:
+    # Macs use libedit, which has a different api.
+    # https://stackoverflow.com/a/7116997
+    readline.parse_and_bind("bind ^I rl_complete")
+  else:
+    readline.parse_and_bind("tab: complete")
 
   del rlcompleter
 
