@@ -34,3 +34,45 @@ if readline:
   del rlcompleter
 
 del readline
+
+
+# Use pprint for printing
+# Modified from https://stackoverflow.com/a/17248483
+
+import sys
+
+class DisplayHook(object):
+  """Display hook that uses pprint."""
+
+  def __init__(self, orig_hook, pretty=False):
+    self.orig_hook = orig_hook
+    import pprint
+    self.pprint = pprint
+    self.pretty = pretty
+
+  # TODO: Try changing the method when toggled, rather than checking
+  # on each call.
+  def __call__(self, value):
+    if self.pretty:
+      if value != None:
+        __builtins__._ = value
+        self.pprint.pprint(value)
+    else:
+      self.orig_hook(value)
+
+  def on(self):
+    self.pretty = True
+
+  def off(self):
+    self.pretty = False
+
+_displayhook = DisplayHook(sys.displayhook)
+
+sys.displayhook = _displayhook
+
+__builtins__.pprint_on = _displayhook.on
+__builtins__.pprint_off = _displayhook.off
+
+del DisplayHook, sys
+
+pprint_on()
