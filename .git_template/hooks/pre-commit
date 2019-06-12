@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # An example hook script to verify what is about to be committed.
 # Called by "git commit" with no arguments.  The hook should
@@ -59,36 +59,36 @@ fi
 # https://github.com/sk-/git-lint/blob/master/scripts/pre-commit.git-lint.sh
 #
 
-# Dash version (repeatedly calls git diff-index)
+# Bash version (uses arrays)
 if type git-lint > /dev/null ; then
 
   # This script runs on both Linux and Mac. The latter doesn't have
-  # --no-run-if-empty flag, so we'll check if there are any files first.
+  # --no-run-if-empty flag, so we'll check if there are any files
+  # first.
 
-  # I have not found a good way in dash to store the results to use later. I've
-  # tried using `echo`, `printf "%b"`, and `printf "%q"` and none worked.
-  get_changed_files () {
-    git diff-index -z --cached HEAD --name-only --diff-filter ACMRTUXB
-  }
+  # Cache list of files to lint. This uses bash arrays, hence /bin/bash, not
+  # /bin/sh.
+  changed_files=()
+  while read -d '' -r filename; do
+    changed_files+=("${filename}")
+  done < <(git diff-index -z --cached HEAD --name-only --diff-filter ACMRTUXB)
 
-  if ( get_changed_files | grep -q . ); then
+  if [ "${#changed_files[@]}" -ne 0 ]; then
 
-    # git-lint will work on the files on disk, i.e. the working copy. We don't
-    # want that. Instead we'll checkout the changed files, and only the changed
-    # files, from the index to temp folder. Then trick git lint to run against
-    # that.
+    # git-lint will work on the files on disk, i.e. the working
+    # copy. We don't want that. Instead we'll checkout the changed
+    # files, and only the changed files, from the index to temp
+    # folder. Then trick git lint to run against that.
     #
-    # Another possible approach, suggested by many sources online suggest just
-    # stashing the working copy only. The unstash can be done by a trap, which
-    # would catch most cases, but leave things in a unexpected state if things
-    # go wrong. And even if they work, they will cause problems with any editors
-    # that have the files open.
-    GIT_DIR="$( cd "$(git rev-parse --git-dir)" && pwd )"
+    # Another possible approach, suggested by many sources online
+    # suggest just stashing the working copy only. The unstash can be
+    # done by a trap, which would catch most cases, but leave things
+    # in a unexpected state if things go wrong. And even if they work,
+    # they will cause problems with any editors that have the files
+    # open.
+    GIT_DIR="$( cd $(git rev-parse --git-dir) && pwd )"
 
     tempdir=$(mktemp -d "${TMPDIR:-/tmp}/precommitXXXXXX")
-    # Note: In dash, this won't clean up on interrupt. Not ideal, but should be
-    # fine.
-    # TODO: Be robust against SIGINT.
     trap 'rm -rf "${tempdir}"' EXIT
 
     # Copy .gitlint.yaml if one exists.
@@ -96,19 +96,10 @@ if type git-lint > /dev/null ; then
       cp .gitlint.yaml "${tempdir}/"
     fi
 
-    get_changed_files | xargs -0 git checkout-index "--prefix=${tempdir}/" -f --
+    git checkout-index "--prefix=${tempdir}/" -f -- "${changed_files[@]}"
 
-    original_cwd="$(pwd)"
-    cd "${tempdir}" || exit 1
-    # Ugh.... git diff-index doesn't respect GIT_DIR when run from inside the
-    # pre-commit hook. It just outputs no files. So we need to pop back to the
-    # original directory to get the list of files, then come back to this
-    # directory from git lint.
-    #
-    # Could use "find . -type f \! -name .gitlint.yaml -print0" instead, but
-    # this is fast enough, if not faster for larger commits, and good enough.
-    (cd "${original_cwd}"; get_changed_files) \
-       | GIT_DIR="${GIT_DIR}" xargs -0 git lint
+    pushd "${tempdir}" > /dev/null
+    GIT_DIR="${GIT_DIR}" git lint "${changed_files[@]}"
     lint_exit_code="$?"
 
     if [ "${lint_exit_code}" != "0" ]; then
@@ -119,7 +110,7 @@ if type git-lint > /dev/null ; then
       exit 1;
     fi
 
-    cd "${original_cwd}"
+    popd > /dev/null
   fi
 else
   echo "Skipping git-lint: Not installed"
