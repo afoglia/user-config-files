@@ -46,4 +46,81 @@ EOF
 fi
 
 # If there are whitespace errors, print the offending file names and fail.
-exec git diff-index --check --cached $against --
+git diff-index --check --cached $against --
+if [ "$?" != 0 ]; then
+  exit 1
+fi
+
+
+#
+# Run git-lint
+#
+# Based very, very loosely on
+# https://github.com/sk-/git-lint/blob/master/scripts/pre-commit.git-lint.sh
+#
+
+# Dash version (repeatedly calls git diff-index)
+if type git-lint > /dev/null ; then
+
+  # This script runs on both Linux and Mac. The latter doesn't have
+  # --no-run-if-empty flag, so we'll check if there are any files first.
+
+  # I have not found a good way in dash to store the results to use later. I've
+  # tried using `echo`, `printf "%b"`, and `printf "%q"` and none worked.
+  get_changed_files () {
+    git diff-index -z --cached HEAD --name-only --diff-filter ACMRTUXB
+  }
+
+  if ( get_changed_files | grep -q . ); then
+
+    # git-lint will work on the files on disk, i.e. the working copy. We don't
+    # want that. Instead we'll checkout the changed files, and only the changed
+    # files, from the index to temp folder. Then trick git lint to run against
+    # that.
+    #
+    # Another possible approach, suggested by many sources online suggest just
+    # stashing the working copy only. The unstash can be done by a trap, which
+    # would catch most cases, but leave things in a unexpected state if things
+    # go wrong. And even if they work, they will cause problems with any editors
+    # that have the files open.
+    GIT_DIR="$( cd "$(git rev-parse --git-dir)" && pwd )"
+
+    tempdir=$(mktemp -d "${TMPDIR:-/tmp}/precommitXXXXXX")
+    # Note: In dash, this won't clean up on interrupt. Not ideal, but should be
+    # fine.
+    # TODO: Be robust against SIGINT.
+    trap 'rm -rf "${tempdir}"' EXIT
+
+    # Copy .gitlint.yaml if one exists.
+    if [ -f .gitlint.yaml ]; then
+      cp .gitlint.yaml "${tempdir}/"
+    fi
+
+    get_changed_files | xargs -0 git checkout-index "--prefix=${tempdir}/" -f --
+
+    original_cwd="$(pwd)"
+    cd "${tempdir}" || exit 1
+    # Ugh.... git diff-index doesn't respect GIT_DIR when run from inside the
+    # pre-commit hook. It just outputs no files. So we need to pop back to the
+    # original directory to get the list of files, then come back to this
+    # directory from git lint.
+    #
+    # Could use "find . -type f \! -name .gitlint.yaml -print0" instead, but
+    # this is fast enough, if not faster for larger commits, and good enough.
+    (cd "${original_cwd}"; get_changed_files) \
+       | GIT_DIR="${GIT_DIR}" xargs -0 git lint
+    lint_exit_code="$?"
+
+    if [ "${lint_exit_code}" != "0" ]; then
+      echo "There are some problems with the modified files.";
+      echo "Fix them before committing or suggest a change to the rules defined in REPO_HOME/.gitlint.yaml.";
+      echo "If it is not possible to fix them all commit with the option --no-verify.";
+
+      exit 1;
+    fi
+
+    cd "${original_cwd}"
+  fi
+else
+  echo "Skipping git-lint: Not installed"
+fi
