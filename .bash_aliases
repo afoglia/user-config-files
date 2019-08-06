@@ -176,11 +176,11 @@ if [[ $(uname -s) == "Darwin" ]] ; then
   # Add alias to set-up and tear down permissions required for brew
   brew () {
     echo "Setting /usr/local directories as world-writeable"
-    sudo chmod o+w /usr/local/{bin,etc,sbin,share,share/doc}
+    sudo chmod o+w /usr/local/{bin,etc,sbin,share,share/doc,share/zsh,share/zsh/site-functions}
     command brew $@
     EXITVALUE=$?
     echo "Resetting permissions of /usr/local directories"
-    sudo chmod o-w /usr/local/{bin,etc,sbin,share,share/doc}
+    sudo chmod o-w /usr/local/{bin,etc,sbin,share,share/doc,share/zsh,share/zsh/site-functions}
     return "${EXITVALUE}"
   }
 fi
