@@ -14,11 +14,20 @@ record =
 [extdiff]
 cmd.meld =
 cmd.diffall = meld
+cmd.diffmerge = /usr/local/bin/diffmerge
 
 [pager]
 pager = less
 
 [alias]
 colors = debugcolor
+
+[merge-tools]
+diffmerge.executable = /usr/local/bin/diffmerge
+diffmerge.args = --result=$output -t1="Local Version" -t2=$output -t3="Other Version" --caption=$output  $local $base $other
+diffmerge.binary = False
+diffmerge.symlinks = False
+diffmerge.gui = True
+diffmerge.premerge = True
 
 %include ~/.hgrc.local
