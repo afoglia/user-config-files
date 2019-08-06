@@ -214,6 +214,14 @@ _git-cd () {
 
 complete -o nospace -F _git-cd git-cd
 
+
+# Glogg log viewer, OSX alias
+
+if [[ -x /Applications/glogg.app/Contents/MacOS/glogg ]]; then
+  alias glogg=/Applications/glogg.app/Contents/MacOS/glogg
+fi
+
+
 # Site-specific stuff not to be shared cross-system
 if [[ -f ${HOME}/.bash_aliases.local ]] ; then
   . ${HOME}/.bash_aliases.local
