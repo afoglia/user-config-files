@@ -89,3 +89,7 @@
 # Hack to do OSX-specific configurations
 [includeIf "gitdir:/Users"]
   path = ~/.gitconfig.d/osx
+
+[url "git@github.com:"]
+  pushInsteadOf = https://github.com/
+  pushInsteadOf = git://github.com/
