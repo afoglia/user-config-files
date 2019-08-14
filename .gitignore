@@ -14,3 +14,6 @@
 
 # Stored annotate stdout/stderr logs
 *.annotate
+
+# git-lint <https://github.com/sk-/git-lint>
+.gitlint.yaml
