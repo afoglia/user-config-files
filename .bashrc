@@ -20,7 +20,7 @@ HISTSIZE=10000
 HISTFILESIZE=20000
 
 # Add timestamp to history
-export HISTTIMEFORMAT='%F %T >> '
+HISTTIMEFORMAT='%F %T  '
 
 # Keep carriage returns in history
 shopt -s lithist
