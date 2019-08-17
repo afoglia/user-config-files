@@ -81,6 +81,7 @@ alias vncserver-ajf="vncserver -geometry 1880x1130" # -dpi 75"
 # On OSX, use Emacs.app
 if [ -x /Applications/Emacs.app/Contents/MacOS/bin/emacsclient ] ; then
   alias emacsclient=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient
+  alias emacs_app=/Applications/Emacs.app/Contents/MacOS/Emacs
 fi
 
 # Use server/client mode
@@ -88,12 +89,16 @@ fi
 # vi for those simple, quick edits.
 # Modified from /usr/share/emacs/22.1/etc/emacs.bash
 function emacsc () {
-  local windowsys="${WINDOW_PARENT+sun}"
+  local windowsys
+  if [[ "$(uname)" == "Darwin" ]]; then
+    windowsys="osx"
+  fi
+  windowsys="${windowsys:-${WINDOW_PARENT+sun}}"
   windowsys="${windowsys:-${DISPLAY+x}}"
   if [ -n "${windowsys:+set}" ]; then
     # Do not just test if these files are sockets.  On some systems
     # ordinary files or fifos are used instead.  Just see if they exist.
-    if [ -e "${HOME}/.emacs_server" -o -e "/tmp/emacs${UID}/server" ]; then
+    if [ -e "${HOME}/.emacs_server" -o -e "${TMPDIR}/emacs${UID}/server" ]; then
        emacsclient -n "$@"
        return $?
     else
@@ -103,6 +108,7 @@ function emacsc () {
     case "${windowsys}" in
       x ) (emacs "$@" &) ;;
       sun ) (emacstool "$@" &) ;;
+      osx ) (emacs_app "$@" &) ;;
     esac
   else
     if jobs %emacs 2> /dev/null ; then
