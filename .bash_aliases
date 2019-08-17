@@ -157,7 +157,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # Kill all Chrome tab rendering processes
 kill-chrome-renderers () {
-  for PID in $(ps ux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper) --type=renderer" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
+  for PID in $(ps ux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper( \(Renderer\))?) --type=renderer" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
     echo ${PID}
     kill ${PID}
   done
@@ -165,7 +165,7 @@ kill-chrome-renderers () {
 
 # Kill Chrome GPU cpu hogger
 kill-chrome-gpu () {
-  for PID in $(ps ux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper) --type=gpu-process" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
+  for PID in $(ps ux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper( \(GPU\)?) --type=gpu-process" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
     echo ${PID}
     kill ${PID}
   done
