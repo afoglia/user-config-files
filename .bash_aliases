@@ -171,7 +171,7 @@ kill-chrome-renderers () {
 
 # Kill Chrome GPU cpu hogger
 kill-chrome-gpu () {
-  for PID in $(ps ux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper( \(GPU\)?) --type=gpu-process" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
+  for PID in $(ps ux | egrep "((/(\w+))+/chrome/chrome|Chrome Helper( \(GPU\))?) --type=gpu-process" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
     echo ${PID}
     kill ${PID}
   done
