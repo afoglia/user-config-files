@@ -220,6 +220,20 @@ fi
 export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgreprc"
 
 
+# Other bash utilities installed
+#
+# Current utilities usually installed:
+#   bash-command-timer: https://github.com/jichu4n/bash-command-timer
+if [[ -d "${HOME}/.local/etc/bash.bashrc.d" ]]; then
+  for fyle in "${HOME}"/.local/etc/bash.bashrc.d/*.sh; do
+    if [[ -r "$fyle" ]]; then
+      . "${fyle}"
+    fi
+  done
+  unset fyle
+fi
+
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
