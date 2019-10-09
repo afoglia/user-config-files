@@ -100,7 +100,8 @@ function emacsc () {
   if [ -n "${windowsys:+set}" ]; then
     # Do not just test if these files are sockets.  On some systems
     # ordinary files or fifos are used instead.  Just see if they exist.
-    if [ -e "${HOME}/.emacs_server" -o -e "${TMPDIR}/emacs${UID}/server" ]; then
+    if [ -e "${HOME}/.emacs_server" -o -e "${TMPDIR:-/tmp}/emacs${UID}/server" ]
+    then
        emacsclient -n "$@"
        return $?
     else
