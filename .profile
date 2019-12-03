@@ -49,10 +49,9 @@ for local_root in "${HOME}/myroot" "${HOME}/.local" ; do
         # Should I be adding these even if the directories don't
         # exist?  If I do, if installing something creates them, it's
         # already in the PATH...
-        add_to_path "PATH" "${local_root}/bin"
-        # echo "Adding usr/bin to PATH"
-        add_to_path "PATH" "${local_root}/usr/bin"
         add_to_path "PATH" "${local_root}/usr/local/bin"
+        add_to_path "PATH" "${local_root}/usr/bin"
+        add_to_path "PATH" "${local_root}/bin"
         add_to_path "MANPATH" "${local_root}/man"
         add_to_path "MANPATH" "${local_root}/share/man"
         add_to_path "INFOPATH" "${local_root}/info"
