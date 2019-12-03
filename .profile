@@ -75,7 +75,5 @@ for local_root in "${HOME}/myroot" "${HOME}/.local" ; do
     fi
 done
 
-export GOPATH=${HOME}/gocode
-
 unset -f add_to_path
 

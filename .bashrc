@@ -216,6 +216,10 @@ elif [[ -f "${HOME}/Library/Python/2.7/bin/virtualenvwrapper.sh" ]]; then
 fi
 
 
+# Go PATH
+export GOPATH="${HOME}/gocode"
+
+
 # Ripgrep
 export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgreprc"
 
