@@ -87,7 +87,7 @@
   path = ~/.gitconfig.d/shared_config_repo
 
 # Hack to do OSX-specific configurations
-[includeIf "gitdir:/Users"]
+[includeIf "gitdir:/Users/"]
   path = ~/.gitconfig.d/osx
 
 [url "git@github.com:"]
