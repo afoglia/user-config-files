@@ -226,10 +226,22 @@ if [ -n "${BASH_VERSION}" ]; then
   complete -o nospace -F _git-cd git-cd
 fi
 
-# Glogg log viewer, OSX alias
+#
+# OSX-specific aliases to make applications act like commands
+#
+# We run the executable directly rather than calling `open -a`,
+# because when using open, the working directory is / so relative
+# paths as arguments are incorrectly interpreted.
+if [[ $(uname -s) == "Darwin" ]] ; then
 
-if [[ -x /Applications/glogg.app/Contents/MacOS/glogg ]]; then
-  alias glogg=/Applications/glogg.app/Contents/MacOS/glogg
+  # Meld
+  if [[ -x /Applications/Meld.app/Contents/MacOS/Meld ]]; then
+    alias meld=/Applications/Meld.app/Contents/MacOS/Meld
+  fi
+  # Glogg log viewer, OSX alias
+  if [[ -x /Applications/glogg.app/Contents/MacOS/glogg ]]; then
+    alias glogg=/Applications/glogg.app/Contents/MacOS/glogg
+  fi
 fi
 
 

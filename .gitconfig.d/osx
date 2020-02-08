@@ -7,6 +7,8 @@
 [mergetool]
   prompt = false
 
+# Git does not respect aliases defined in the shell, so we must define
+# the commands here instead.
 [difftool "meld"]
   cmd = open -W -a Meld --args \"$LOCAL\" \"$REMOTE\"
 [mergetool "meld"]
