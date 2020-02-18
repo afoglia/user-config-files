@@ -42,10 +42,10 @@
 
   # Styled like ack
   # Taken from https://stackoverflow.com/a/39583968/79513
-  ack = "! git -c color.grep.linenumber=\"bold yellow\" \
-               -c color.grep.filename=\"bold green\" \
-               -c color.grep.match=\"reverse yellow\" \
-               grep --break --heading --line-number"
+  ack = -c color.grep.linenumber=\"bold yellow\" \
+        -c color.grep.filename=\"bold green\" \
+        -c color.grep.match=\"reverse yellow\" \
+        grep --break --heading --line-number
   ack-go = "! git ack \"$@\" *.go #"
   ack-gyp = "! git ack \"$@\" *.gyp *.gypi #"
   ack-ninja = "! git ack \"$@\" *.ninja #"
