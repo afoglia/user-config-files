@@ -30,6 +30,13 @@ if [ -n "${BASH_VERSION}" ]; then
   complete -F _command realnice
 fi
 
+# TODO: Expand this for other common environment variables (GTK_RC_FILES?
+# GTK2_RC_FILES? PYTHONPATH? And combine into a pprintenv function?
+pprintpath () {
+  (IFS=: arr=($PATH); printf "%s\n" "${arr[@]}")
+}
+
+
 #
 # Search tools
 #
