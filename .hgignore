@@ -1,0 +1,21 @@
+syntax: glob
+
+# Ignore emacs backup and other temp files
+*~
+\#*#
+.\#*
+
+# Compilation artifacts
+*.o
+*.a
+*.so
+*.lo
+*.la
+*.pyo
+*.pyc
+
+# Stored annotate stdout/stderr logs
+*.annotate
+
+# hg profile output
+hg.profile
