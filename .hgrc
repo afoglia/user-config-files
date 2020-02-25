@@ -9,7 +9,6 @@ color =
 extdiff =
 graphlog =
 mq =
-pager =
 purge =
 rebase =
 record =
@@ -21,7 +20,7 @@ cmd.diffall = meld
 cmd.diffmerge = /usr/local/bin/diffmerge
 
 [pager]
-pager = less
+pager = less -FRX
 
 [alias]
 colors = debugcolor
