@@ -24,6 +24,7 @@ pager = less -FRX
 
 [alias]
 colors = debugcolor
+conflicts = resolve -l
 
 [merge-tools]
 diffmerge.executable = /usr/local/bin/diffmerge

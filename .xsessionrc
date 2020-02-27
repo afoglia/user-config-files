@@ -1,0 +1,8 @@
+# .xsessionrc
+#
+# Read before launching windows manager on Debian systems.
+# See https://wiki.debian.org/Xsession for details.
+
+if [ -r "${HOME}/.profile ] ; then
+  source "${HOME}/.profile"
+fi
