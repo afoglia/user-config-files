@@ -48,7 +48,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color)
+    xterm-color|xterm-256color)
         color_prompt=yes
         export CLICOLOR=1 ;;
 esac
@@ -141,7 +141,7 @@ fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|screen.xterm*|screen.rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
