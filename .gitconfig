@@ -58,6 +58,7 @@
 [credential]
   helper = cache
 [diff]
+  algorithm = histogram
   tool = meld
   mnemonicprefix = true
 [grep]
