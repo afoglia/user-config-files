@@ -205,7 +205,10 @@ if [[ $(uname -s) == "Darwin" ]] ; then
   }
 fi
 
-# cd command that stays within git repo
+
+# git-cd
+#
+# A cd wrapper that stays within git repo.
 git-cd () {
   if [[ "$1" == "--help" ]]; then
     echo "cd within a git repo"
@@ -235,6 +238,43 @@ _git-cd () {
 if [ -n "${BASH_VERSION}" ]; then
   complete -o nospace -F _git-cd git-cd
 fi
+
+
+# hg-cd
+#
+# Same as above, but for mercurial repos
+#
+# TODO: Merge with above
+hg-cd () {
+  if [[ "$1" == "--help" ]]; then
+    echo "cd within a hg repo"
+    return 0
+  fi
+  if [[ -z "$1" || "$1" == /* ]]; then
+    local hg_root
+    hg_root="$(hg-root)" && cd "${hg_root}$1"
+  else
+    cd $1
+  fi
+}
+
+_hg-cd () {
+  local curr
+  COMPREPLY=()
+  curr="${COMP_WORDS[COMP_CWORD]}"
+  if [[ -z "${curr}" || "${curr:0:1}" != "/" ]] ; then
+    COMPREPLY=( $(compgen -d ${curr}) )
+  else
+    local hg_root
+    hg_root="$(hg root)"
+    COMPREPLY=( $( for dyr in $(compgen -d ${hg_root}${curr} ) ; do echo ${dyr:${#hg_root}}/ ; done ) )
+  fi
+}
+
+if [ -n "${BASH_VERSION}" ]; then
+  complete -o nospace -F _hg-cd hg-cd
+fi
+
 
 #
 # OSX-specific aliases to make applications act like commands
