@@ -188,6 +188,9 @@ kill-chrome-gpu () {
   done
 }
 
+# hjson, https://hjson.github.io/
+alias hjson="python -m hjson.tool"
+
 # Mac specific
 if [[ $(uname -s) == "Darwin" ]] ; then
   # Add alias to set-up and tear down permissions required for brew
