@@ -1,5 +1,6 @@
 [ui]
 ignore = ~/.hgignore
+merge = internal:merge3
 
 [diff]
 git = True
