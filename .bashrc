@@ -48,7 +48,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|xterm-256color)
+    xterm-*color|screen-*color)
         color_prompt=yes
         export CLICOLOR=1 ;;
 esac
