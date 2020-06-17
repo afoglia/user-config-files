@@ -9,6 +9,11 @@ git = True
 [extensions]
 color =
 extdiff =
+
+# FS Monitor. Requires Watchman.
+# https://www.mercurial-scm.org/wiki/FsMonitorExtension
+fsmonitor =
+
 graphlog =
 hgk =
 mq =
