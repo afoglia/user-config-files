@@ -252,7 +252,7 @@ hg-cd () {
   fi
   if [[ -z "$1" || "$1" == /* ]]; then
     local hg_root
-    hg_root="$(hg-root)" && cd "${hg_root}$1"
+    HGPLAIN=1 hg_root="$(hg-root)" && cd "${hg_root}$1"
   else
     cd $1
   fi
@@ -266,7 +266,7 @@ _hg-cd () {
     COMPREPLY=( $(compgen -d ${curr}) )
   else
     local hg_root
-    hg_root="$(hg root)"
+    HGPLAIN=1 hg_root="$(hg root)"
     COMPREPLY=( $( for dyr in $(compgen -d ${hg_root}${curr} ) ; do echo ${dyr:${#hg_root}}/ ; done ) )
   fi
 }
