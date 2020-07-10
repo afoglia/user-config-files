@@ -109,10 +109,10 @@ function emacsc () {
     # ordinary files or fifos are used instead.  Just see if they exist.
     if [ -e "${HOME}/.emacs_server" -o -e "${TMPDIR:-/tmp}/emacs${UID}/server" ]
     then
-       emacsclient -n "$@"
-       return $?
+      emacsclient -n "$@"
+      return $?
     else
-       echo "edit: starting emacs in background..." 1>&2
+      echo "edit: starting emacs in background..." 1>&2
     fi
 
     case "${windowsys}" in
