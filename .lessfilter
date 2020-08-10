@@ -15,7 +15,8 @@ case "$1" in
       --style-file="${STYLE}" -i "$1" ;;
   *)
     # Unhandled format.
-    exit 1
+    file "$1" | grep -q text && source-highlight --failsafe --infer-lang -f esc --style-file="${STYLE}" -i "$1"
+    exit $?
 esac
 
 # No further processing by lesspipe necessary
