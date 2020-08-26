@@ -138,8 +138,10 @@ function vimconflicts() {
 
 # Aliases for using git to manage configuration files
 # 
-# See <http://robescriva.com/2009/01/manage-your-home-with-git/> and
-# <http://www.silassewell.com/blog/2009/03/08/profile-management-with-git-and-github/>
+# See <http://robescriva.com/2009/01/manage-your-home-with-git/>,
+# <http://www.silassewell.com/blog/2009/03/08/profile-management-with-git-and-github/>,
+# and <https://wiki.archlinux.org/index.php/Dotfiles#Tracking_dotfiles_directly_with_Git>.
+#
 # To pull updates from other computers run
 # $ config-vc pull origin master
 alias config-vc='git --git-dir=$HOME/.config.git/ --work-tree=$HOME'
