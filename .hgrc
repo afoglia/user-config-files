@@ -1,5 +1,6 @@
 [ui]
 ignore = ~/.hgignore
+interface.chunkselector = text
 merge = internal:merge3
 
 [diff]
