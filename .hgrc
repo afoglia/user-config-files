@@ -21,6 +21,10 @@ cmd.meld =
 cmd.diffall = meld
 cmd.diffmerge = /usr/local/bin/diffmerge
 
+[merge-tools]
+# hg opens all changed files in meld by default. Ugh.
+meld.diffargs=--label=$plabel1 $parent --label=$clabel $child
+
 [pager]
 pager = less -FRX
 
