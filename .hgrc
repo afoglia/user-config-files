@@ -25,6 +25,7 @@ cmd.diffmerge = /usr/local/bin/diffmerge
 pager = less -FRX
 
 [alias]
+aliases = config alias
 colors = debugcolor
 conflicts = resolve -l
 wip = commit --secret
