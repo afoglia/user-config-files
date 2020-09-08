@@ -10,6 +10,7 @@ git = True
 color =
 extdiff =
 graphlog =
+hgk =
 mq =
 purge =
 rebase =
