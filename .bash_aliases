@@ -97,6 +97,11 @@ fi
 # Clients don't need to wait for server to finish.  (I leave my EDITOR set to
 # vi for those simple, quick edits.
 # Modified from /usr/share/emacs/22.1/etc/emacs.bash
+#
+# This has been marked obsolete for a long time (likely even before I added
+# this), but I haven't figured out how to get emacsclient -a to
+# work. `emacsclient -a= -c -n` creates two frames, both with illegibly small
+# fonts.
 function emacsc () {
   local windowsys
   if [[ "$(uname)" == "Darwin" ]]; then
@@ -105,16 +110,26 @@ function emacsc () {
   windowsys="${windowsys:-${WINDOW_PARENT+sun}}"
   windowsys="${windowsys:-${DISPLAY+x}}"
   if [ -n "${windowsys:+set}" ]; then
+    # Check for emacs server socket.
+    #
+    # In emacs 27, the server socket is under XDG_RUNTIME_DIR.  In earlier
+    # versions it's either under TMPDIR or at ~/.emacs_server. (The latter is
+    # likely either windows or really, really old releases.)  In general emacs
+    # usually, uses the variable `server-socket-dir`, so if this breaks, that's
+    # the variable to compare against. (There are some other cases. Look in
+    # server.el for details.)
+    #
     # Do not just test if these files are sockets.  On some systems
     # ordinary files or fifos are used instead.  Just see if they exist.
-    if [ -e "${HOME}/.emacs_server" -o -e "${TMPDIR:-/tmp}/emacs${UID}/server" ]
+    if [[ ( -n "${XDG_RUNTIME_DIR}" && -e "${XDG_RUNTIME_DIR}/emacs/server" )
+          || -e "${TMPDIR:-/tmp}/emacs${UID}/server"
+          || -e "${HOME}/.emacs_server" ]]
     then
       emacsclient -n "$@"
       return $?
-    else
-      echo "edit: starting emacs in background..." 1>&2
     fi
 
+    echo "edit: starting emacs in background..." 1>&2
     case "${windowsys}" in
       x ) (emacs "$@" &) ;;
       sun ) (emacstool "$@" &) ;;
