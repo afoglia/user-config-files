@@ -66,10 +66,12 @@
 [push]
   default = simple
 [merge]
+  autostash = true
   stat = true
   conflictstyle = diff3
 [rebase]
   autosquash = true
+  autostash = true
   missingCommitsCheck = warn
 [receive]
   denyCurrentBranch = updateInstead
