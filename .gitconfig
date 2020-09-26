@@ -46,11 +46,11 @@
         -c color.grep.filename=\"bold green\" \
         -c color.grep.match=\"reverse yellow\" \
         grep --break --heading --line-number
-  ack-go = "! git ack \"$@\" *.go #"
-  ack-gyp = "! git ack \"$@\" *.gyp *.gypi #"
-  ack-ninja = "! git ack \"$@\" *.ninja #"
-  ack-py = "! git ack \"$@\" *.py #"
-  ack-proto = "! git ack \"$@\" *.proto #"
+  ack-go = "ack \"$@\" *.go #"
+  ack-gyp = "ack \"$@\" *.gyp *.gypi #"
+  ack-ninja = "ack \"$@\" *.ninja #"
+  ack-py = "ack \"$@\" *.py #"
+  ack-proto = "ack \"$@\" *.proto #"
 [color "diff"]
   new = green bold
   old = red bold
