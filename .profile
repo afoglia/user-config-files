@@ -36,9 +36,9 @@ fi
 
 add_to_path () {
     echo "Adding to path ${1} ${2}"
-    if [ -d $2 ] ; then
+    if [ -d "$2" ] ; then
         #eval OLDPATH=\$$1
-        eval export $1=$2:\$${1}
+        eval export "$1"="$2:\$${1}"
     fi
 }
 
