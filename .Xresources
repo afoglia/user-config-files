@@ -19,7 +19,7 @@ URxvt*saveLines:12000
 ! URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=13
 
 ! traditional fonts - a more traditional font setup in lieu of xft
-URxvt*font:-*-terminus-medium-r-*-*-12-*-*-*-*-*-*
+URxvt*font:-*-terminus-medium-r-*-*-12-*-*-*-*-iso8859-*
 !URxvt*boldFont:-*-courier-bold-r-normal-*-*-140-*-*-*-*-iso8859-1
 
 ! urxvt color theme, based on
