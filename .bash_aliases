@@ -90,7 +90,10 @@ alias vncserver-ajf="vncserver -geometry 1880x1130" # -dpi 75"
 # On OSX, use Emacs.app
 if [ -x /Applications/Emacs.app/Contents/MacOS/bin/emacsclient ] ; then
   alias emacsclient=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient
-  alias emacs_app=/Applications/Emacs.app/Contents/MacOS/Emacs
+  # Calling the app bundle with "open -a Emacs.app --args", launches emacs, but
+  # any file names passed in are treated as in the home directory, rather than
+  # in the cwd. Using -- works though it's undocumented.
+  alias emacs_app="open -a Emacs --"
 fi
 
 # Use server/client mode
