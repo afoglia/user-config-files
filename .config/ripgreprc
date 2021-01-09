@@ -1,2 +1,6 @@
+--max-columns-preview
+
+--smart-case
+
 --type-add=gyp:*.{gyp,gypi}
 --type-add=ninja:*.ninja
