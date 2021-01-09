@@ -56,6 +56,16 @@ alias ag-ninja="ag --file-search-regex \.ninja\$"
 alias ag-py="ag --python"
 alias ag-proto="ag --proto"
 
+# Wrapper for ripgrep to pipe to less if run from terminal
+# https://github.com/BurntSushi/ripgrep/issues/86#issuecomment-364968686
+rg () {
+  if [[ -t 1 ]]; then
+    command rg -p "$@" | less -RFX
+  else
+    command rg "$@"
+  fi
+}
+
 
 # Keep Nautilus from taking over the desktop
 #
