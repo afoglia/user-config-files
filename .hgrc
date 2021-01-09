@@ -35,6 +35,7 @@ meld.diffargs=--label=$plabel1 $parent --label=$clabel $child
 pager = less -FRX
 
 [alias]
+# TODO: Add ...:help, ...:doc, and ...:category as appropriate
 aliases = config alias
 colors = debugcolor
 conflicts = resolve -l
