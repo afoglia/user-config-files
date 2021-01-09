@@ -1,3 +1,15 @@
+# Alias xargs to xargs with a trailing space so "xargs ALIAS" expands the
+# alias. This trick only works with the word following xargs, so "xargs -0
+# ALIAS" will still fail. And it only works with bash aliases, not bash
+# functions.
+#
+# https://stackoverflow.com/a/59842439/79513
+#
+# See https://stackoverflow.com/a/979657/79513 for a more complicated approach
+# that would also work with bash functions.
+alias xargs="xargs "
+
+
 if [[ $(uname -s) == "Darwin" ]] ; then
   # Use CLICOLOR to set color
   alias ls="ls -F"
