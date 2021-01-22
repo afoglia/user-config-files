@@ -224,6 +224,10 @@ export GOPATH="${HOME}/gocode"
 export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgreprc"
 
 
+# fzf
+export FZF_DEFAULT_COMMAND="fd"
+
+
 # Other bash utilities installed
 #
 # Current utilities usually installed:
