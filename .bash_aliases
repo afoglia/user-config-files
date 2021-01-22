@@ -65,7 +65,14 @@ fi
 # Type-specific alias for ack and python
 alias ack-py="ack --type=python"
 
-# Type-specific aliases for ag
+# ag: paged output and type specific aliases
+ag () {
+  if [[ -t 1 ]]; then
+    command ag --pager "less -RFX" "$@"
+  else
+    command ag "$@"
+  fi
+}
 alias ag-go="ag --go"
 alias ag-gyp="ag --file-search-regex \.gypi\?\$"
 alias ag-ninja="ag --file-search-regex \.ninja\$"
