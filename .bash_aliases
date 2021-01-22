@@ -54,6 +54,10 @@ pprintpath () {
 #
 
 # Undo debian/ubuntu's renaming of these utilities
+if command -v fdfind > /dev/null 2>&1 ;  then
+  alias fd="fdfind"
+fi
+
 if command -v ack-grep > /dev/null 2>&1 ; then
   alias ack="ack-grep"
 fi
