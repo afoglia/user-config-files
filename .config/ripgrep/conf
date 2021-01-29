@@ -4,12 +4,3 @@
 
 --type-add=gyp:*.{gyp,gypi}
 --type-add=ninja:*.ninja
-
-# Files to regularly ignore
-#
-# (I'm not a huge fan of the desire to have a file named simple
-# ~/.ignore.)
-#
-# This does ignore a little too much, but not too much.
-# TODO: Make ignore file just for rg
---ignore-file="${HOME}/.gitignore"

@@ -83,9 +83,9 @@ alias ag-proto="ag --proto"
 # https://github.com/BurntSushi/ripgrep/issues/86#issuecomment-364968686
 rg () {
   if [[ -t 1 ]]; then
-    command rg -p "$@" | less -RFX
+    command rg --ignore-file="${RIPGREP_CONFIG_PATH%/*}/ignore" -p "$@" | less -RFX --mouse
   else
-    command rg "$@"
+    command rg --ignore-file="${RIPGREP_CONFIG_PATH%/*}/ignore" "$@"
   fi
 }
 
