@@ -68,7 +68,7 @@ alias ack-py="ack --type=python"
 # ag: paged output and type specific aliases
 ag () {
   if [[ -t 1 ]]; then
-    command ag --pager "less -RFX" "$@"
+    command ag --pager "less -RFX --mouse" "$@"
   else
     command ag "$@"
   fi
