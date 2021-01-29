@@ -225,8 +225,13 @@ export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgrep/conf"
 
 
 # fzf
-export FZF_DEFAULT_COMMAND="fd"
-
+if command -v fd > /dev/null 2>&1 ; then
+  export FZF_DEFAULT_COMMAND="fd"
+else
+  if commsnd -v fdfind > /dev/null 2>&1 ; then
+    export FZF_DEFAULT_COMMAND="fdfind"
+  fi
+fi
 
 # Other bash utilities installed
 #
