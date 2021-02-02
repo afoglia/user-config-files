@@ -63,6 +63,8 @@
   mnemonicprefix = true
 [grep]
   lineNumber = true
+[pull]
+  rebase = true
 [push]
   default = simple
 [merge]
