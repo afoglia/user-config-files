@@ -225,6 +225,9 @@ export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgrep/conf"
 
 
 # fzf
+#
+# TODO: Set up colors <https://github.com/junegunn/fzf/wiki/Color-schemes>
+
 if command -v fd > /dev/null 2>&1 ; then
   export FZF_DEFAULT_COMMAND="fd"
 else
@@ -232,6 +235,22 @@ else
     export FZF_DEFAULT_COMMAND="fdfind"
   fi
 fi
+
+if [[ -f /usr/share/doc/fzf/examples/completion.bash ]]; then
+  . /usr/share/doc/fzf/examples/completion.bash
+fi
+
+if type -t _fzf_setup_completion > /dev/null; then
+  _fzf_setup_completion path emacsc
+fi
+
+if [[ -f /usr/share/doc/fzf/examples/key-bindings.bash ]]; then
+  . /usr/share/doc/fzf/examples/key-bindings.bash
+fi
+# TODO: Combine with logic in .lessfilter.
+export FZF_CTRL_T_OPTS="--select-1 --exit-0 --preview '(highlight -O ans --style clarityi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 # Other bash utilities installed
 #
