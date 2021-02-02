@@ -231,7 +231,7 @@ export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgrep/conf"
 if command -v fd > /dev/null 2>&1 ; then
   export FZF_DEFAULT_COMMAND="fd"
 else
-  if commsnd -v fdfind > /dev/null 2>&1 ; then
+  if command -v fdfind > /dev/null 2>&1 ; then
     export FZF_DEFAULT_COMMAND="fdfind"
   fi
 fi
