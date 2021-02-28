@@ -10,6 +10,8 @@ set visible-stats on
 # Add trailing slash to completions of symlinks to directories
 set mark-symlinked-directories on
 
+set blink-matching-paren on
+
 # Do history expansion in bash
 $if Bash
   Space: magic-space
