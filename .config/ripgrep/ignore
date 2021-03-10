@@ -1,0 +1,20 @@
+# Ripgrep ignore file
+#
+# TODO: Merge with other ignore files (ag, git, etc.)
+
+# Ignore emacs backup and other temp files
+*~
+\#*#
+.\#*
+
+# Compilation artifacts
+*.o
+*.a
+*.so
+*.lo
+*.la
+*.pyo
+*.pyc
+
+# Stored annotate stdout/stderr logs
+*.annotate
