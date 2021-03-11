@@ -250,10 +250,20 @@ kill-chrome-gpu () {
 # hjson, https://hjson.github.io/
 alias hjson="python -m hjson.tool"
 
+#
 # Mac specific
+#
 if [[ $(uname -s) == "Darwin" ]] ; then
+
+  # brew
+
   # Add alias to set-up and tear down permissions required for brew
   brew () {
+    if [[ "$1" != "install" && "$1" != "upgrade" && "$1" != "update" ]]; then
+      # sudo permissions not needed
+      command brew "$@"
+      return $?
+    fi
     echo "Setting /usr/local directories as world-writeable"
     sudo chmod o+w /usr/local/{bin,etc,sbin,share,share/doc,share/zsh,share/zsh/site-functions,lib/pkgconfig,share/man/man5}
     command brew $@
@@ -262,6 +272,19 @@ if [[ $(uname -s) == "Darwin" ]] ; then
     sudo chmod o-w /usr/local/{bin,etc,sbin,share,share/doc,share/zsh,share/zsh/site-functions,lib/pkgconfig,share/man/man5}
     return "${EXITVALUE}"
   }
+
+  # Brew completion
+  # https://docs.brew.sh/Shell-Completion
+  if type -P brew &>/dev/null; then
+    HOMEBREW_PREFIX="$(command brew --prefix)"
+    if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+      source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+    else
+      for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+        [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+      done
+    fi
+  fi
 fi
 
 
