@@ -65,10 +65,16 @@ fi
 # Type-specific alias for ack and python
 alias ack-py="ack --type=python"
 
+if [[ $(uname -s) == "Darwin" ]]; then
+  LESS_PAGE_RESULTS_ARGS=-RFX
+else
+  LESS_PAGE_RESULTS_ARGS="-RFX --mouse"
+fi
+
 # ag: paged output and type specific aliases
 ag () {
   if [[ -t 1 ]]; then
-    command ag --pager "less -RFX --mouse" "$@"
+    command ag --pager "less ${LESS_PAGE_RESULTS_ARGS}" "$@"
   else
     command ag "$@"
   fi
@@ -83,7 +89,7 @@ alias ag-proto="ag --proto"
 # https://github.com/BurntSushi/ripgrep/issues/86#issuecomment-364968686
 rg () {
   if [[ -t 1 ]]; then
-    command rg --ignore-file="${RIPGREP_CONFIG_PATH%/*}/ignore" -p "$@" | less -RFX --mouse
+    command rg --ignore-file="${RIPGREP_CONFIG_PATH%/*}/ignore" -p "$@" | less ${LESS_PAGE_RESULTS_ARGS}
   else
     command rg --ignore-file="${RIPGREP_CONFIG_PATH%/*}/ignore" "$@"
   fi
