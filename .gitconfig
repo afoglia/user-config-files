@@ -2,7 +2,10 @@
   ui = auto
 [core]
   pager = less -FX
-  excludesfile = ~/.gitignore
+  # This defaults to ~/.config/git/ignore. No reason I can't stick
+  # with that default thought I should check the defaults on other
+  # platforms as well.
+  #excludesfile = ~/.gitignore
   editor = "vim +0"
   protectHFS = true
   protectNTFS = true
