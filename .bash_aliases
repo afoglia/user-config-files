@@ -78,6 +78,13 @@ fi
 # Type-specific alias for ack and python
 alias ack-py="ack --type=python"
 
+# Special pager settings for auto-paging results
+
+# Not clear if I want pass -E to less. On the one hand, it quits at the end of
+# file; without it, scrolling to the end of the file causes some escape
+# characters to written to the command prompt. On the other hand, jumping to the
+# end of the file (with `G`) causes less to quit right away, so you can't go
+# backwards in the results.
 if [[ $(uname -s) == "Darwin" ]]; then
   LESS_PAGE_RESULTS_ARGS=-RFX
 else
