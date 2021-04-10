@@ -17,7 +17,20 @@ if [[ $(uname -s) == "Darwin" ]] ; then
     alias md5sum="openssl md5"
   fi
 else
-  alias ls="ls -F --color=auto"
+  # "function" keyword is needed here because ls is already defined as an alias
+  # in .bashrc, which means that, upon loading, bash expands ls to the alias,
+  # before even running the "unalias" statement, which causes problems.
+  #
+  # TODO: Is there a better way?
+  unalias ls
+  function ls () {
+    if [[ -t 1 ]]; then
+      command ls -F -C --color=always "$@" | less -RFX
+    else
+      command ls -F --color=auto "$@"
+    fi
+  }
+  # alias ls="ls -F --color=auto"
 fi
 
 # Use bc extensions from
