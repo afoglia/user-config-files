@@ -9,8 +9,10 @@
 *.so
 *.lo
 *.la
-*.pyo
-*.pyc
+
+# Python artifacts
+__pycache__/*
+*.py[cod]
 
 # Stored annotate stdout/stderr logs
 *.annotate
