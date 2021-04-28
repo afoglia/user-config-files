@@ -187,6 +187,10 @@ function emacsc () {
           || -e "${TMPDIR:-/tmp}/emacs${UID}/server"
           || -e "${HOME}/.emacs_server" ]]
     then
+      if [ $# -eq 0 ]; then
+        echo "Emacs server already running. Filename required." 1>&2
+        return 1
+      fi
       emacsclient -n "$@"
       return $?
     fi
