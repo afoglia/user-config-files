@@ -4,6 +4,12 @@
 
 # shellcheck shell=bash
 
+# Other config notes that don't fit elsewhere
+#
+#   1. On mac, run `defaults write -g AppleShowAllFiles -bool true` to show
+#      hidden folders in Finder and file picker. (Force it with a check in here
+#      or .profile?)
+
 #echo "$(date): In .bashrc"
 
 # If not running interactively, don't do anything
