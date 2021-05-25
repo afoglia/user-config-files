@@ -12,10 +12,14 @@ set tabstop=2
 
 set smarttab
 
-" Load indent files for specific filetypes
-filetype indent on
+""
 "" Load indent and plugin files for specific filetypes
-"filetype plugin indent on
+""
+" plugin customizations are in .vim/ftplugin and .vim/after/ftplugin
+"
+" Use ":set filetype?" to get current filetype
+"
+filetype plugin indent on
 
 " Turn on color highlighting
 syntax on
