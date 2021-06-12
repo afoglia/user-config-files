@@ -8,9 +8,12 @@ set wildmenu
 " Use spaces instead of tabs
 set expandtab
 
-set tabstop=2
+set shiftwidth=2
+set softtabstop=-2
 
 set smarttab
+
+set autoindent
 
 ""
 "" Load indent and plugin files for specific filetypes
