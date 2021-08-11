@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# shellcheck shell=bash
+
 #echo "$(date): In .bashrc"
 
 # If not running interactively, don't do anything
@@ -83,8 +85,8 @@ trunc_path ()
   # DIR=$(pwd | sed ${_sed_extended_regexp_flag} "s,^${HOME%${USER}}($USER)?,~," );
   # Requires extglob shell options
   DIR=${PWD/#${HOME%${USER}}?(${USER})/\~}
-  DIR=$(echo $DIR | awk -F / '{ if (NF>4) { print $1"/.../"$(NF-2)"/"$(NF-1)"/"$NF } else { print $0 } }' ) ;
-  echo $DIR;
+  DIR=$(echo "${DIR}" | awk -F / '{ if (NF>4) { print $1"/.../"$(NF-2)"/"$(NF-1)"/"$NF } else { print $0 } }' ) ;
+  echo "${DIR}";
   return 0
 }
 
@@ -93,9 +95,9 @@ trunc_path ()
 # prompt coloring
 ps_trunc_path ()
 {
-    EXITSTATUS="$?"
+    EXITSTATUS=$?
     trunc_path
-    return $(echo ${EXITSTATUS})
+    return "${EXITSTATUS}"
 }
 
 if [ ${CLICOLOR} ] || [ -n "${COLORTERM}" ] ; then
@@ -207,7 +209,7 @@ fi
 
 # Virtualenvwrapper shell scripts
 #echo "$(date): Setting up virtualenvs"
-export WORKON_HOME=${HOME}/.virtualenvs
+export WORKON_HOME="${HOME}/.virtualenvs"
 if [[ -f /usr/local/bin/virtualenvwrapper_bashrc ]]; then
   . /usr/local/bin/virtualenvwrapper_bashrc
 elif [[ -f "${HOME}/Library/Python/2.7/bin/virtualenvwrapper.sh" ]]; then

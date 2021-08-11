@@ -1,3 +1,8 @@
+# shellcheck shell=bash
+
+# Disable warnings about egrep and fgrep instead of "grep -E" and "grep -F"
+# shellcheck disable=SC2196,SC2197
+
 # Alias xargs to xargs with a trailing space so "xargs ALIAS" expands the
 # alias. This trick only works with the word following xargs, so "xargs -0
 # ALIAS" will still fail. And it only works with bash aliases, not bash
@@ -85,6 +90,9 @@ alias ack-py="ack --type=python"
 # characters to written to the command prompt. On the other hand, jumping to the
 # end of the file (with `G`) causes less to quit right away, so you can't go
 # backwards in the results.
+#
+# TODO: Convert to bash array so I can safely expand it in rg wrapper command
+# below.
 if [[ $(uname -s) == "Darwin" ]]; then
   LESS_PAGE_RESULTS_ARGS=-RFX
 else
@@ -127,7 +135,7 @@ fi
 alias svndiff="svn diff --diff-cmd colordiff --extensions=-up"
 alias svndiff-gui="svn diff --diff-cmd meld"
 svn-filtered-status () {
-  svn status $* | egrep -v "^((\?|X|Performing ).*|)$"
+  svn status "$@" | egrep -v "^((\?|X|Performing ).*|)$"
 }
 
 # h5diff alias
@@ -135,7 +143,7 @@ svn-filtered-status () {
 # h5diff reports two cells with nans as different.  This will filter them out.
 # The differences will still be counted, but the lines will not be outputted.
 h5diff-no-nan () {
-  h5diff $* | egrep -v "( +nan){3} *$"
+  h5diff "$@" | egrep -v "( +nan){3} *$"
 }
 
 # VNC settings
@@ -203,7 +211,7 @@ function emacsc () {
     esac
   else
     if jobs %emacs 2> /dev/null ; then
-       echo "$(pwd)" "$@" >| ${HOME}/.emacs_args && fg %emacs
+       echo "$(pwd)" "$@" >| "${HOME}/.emacs_args" && fg %emacs
     else
        emacs "$@"
     fi
@@ -228,9 +236,9 @@ function vimconflicts() {
 alias config-vc='git --git-dir=$HOME/.config.git/ --work-tree=$HOME'
 if [ -n "${BASH_VERSION}" ]; then
   if [ -f /etc/bash_completion ] ; then
-    if $(type -t _git > /dev/null) ; then
+    if type -t _git > /dev/null ; then
       complete -o default -o nospace -F _git config-vc
-    elif $(type -t _xfunc > /dev/null) ; then
+    elif type -t _xfunc > /dev/null ; then
       # Bash kindly created a dynamic loading framework for completions,
       # but with no documentation or hooks on how to enable it for yourself.
       # https://github.com/scop/bash-completion/issues/49
@@ -245,7 +253,7 @@ fi
 pypath () {
   # Pass in arguments (e.g. "-S" for disabling site module, or "-E" to
   # ignore environmental variables)
-  python $* -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"
+  python "$@" -c "import sys; print sys.path" | tr "," "\n" | grep -v "egg"
 }
 
 alias lsvirtualenv="lsvirtualenv -b"
@@ -258,16 +266,16 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Kill all Chrome tab rendering processes
 kill-chrome-renderers () {
   for PID in $(ps uxww | egrep "((/(\w+))+/chrome/chrome|Chrome Helper( \(Renderer\))?) --type=renderer" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
-    echo ${PID}
-    kill ${PID}
+    echo "${PID}"
+    kill "${PID}"
   done
 }
 
 # Kill Chrome GPU cpu hogger
 kill-chrome-gpu () {
   for PID in $(ps uxww | egrep "((/(\w+))+/chrome/chrome|Chrome Helper( \(GPU\))?) --type=gpu-process" | grep -v " --extension-process" | awk '{ print $2 }' ) ; do
-    echo ${PID}
-    kill ${PID}
+    echo "${PID}"
+    kill "${PID}"
   done
 }
 
@@ -290,7 +298,7 @@ if [[ $(uname -s) == "Darwin" ]] ; then
     fi
     echo "Setting /usr/local directories as world-writeable"
     sudo chmod o+w /usr/local/{bin,etc,sbin,share,share/doc,share/zsh,share/zsh/site-functions,lib/pkgconfig,share/man/man5}
-    command brew $@
+    command brew "$@"
     EXITVALUE=$?
     echo "Resetting permissions of /usr/local directories"
     sudo chmod o-w /usr/local/{bin,etc,sbin,share,share/doc,share/zsh,share/zsh/site-functions,lib/pkgconfig,share/man/man5}
@@ -324,7 +332,7 @@ git-cd () {
     local git_root
     git_root="$(git-root)" && cd "${git_root}$1"
   else
-    cd $1
+    cd "$1"
   fi
 }
 
@@ -333,11 +341,11 @@ _git-cd () {
   COMPREPLY=()
   curr="${COMP_WORDS[COMP_CWORD]}"
   if [[ -z "${curr}" || "${curr:0:1}" != "/" ]] ; then
-    COMPREPLY=( $(compgen -d ${curr}) )
+    COMPREPLY=( $(compgen -d "${curr}") )
   else
     local git_root
     git_root="$(git root)"
-    COMPREPLY=( $( for dyr in $(compgen -d ${git_root}${curr} ) ; do echo ${dyr:${#git_root}}/ ; done ) )
+    COMPREPLY=( $( for dyr in $(compgen -d "${git_root}${curr}" ) ; do echo "${dyr:${#git_root}}/" ; done ) )
   fi
 }
 
@@ -360,7 +368,7 @@ hg-cd () {
     local hg_root
     HGPLAIN=1 hg_root="$(hg-root)" && cd "${hg_root}$1"
   else
-    cd $1
+    cd "$1"
   fi
 }
 
@@ -369,11 +377,11 @@ _hg-cd () {
   COMPREPLY=()
   curr="${COMP_WORDS[COMP_CWORD]}"
   if [[ -z "${curr}" || "${curr:0:1}" != "/" ]] ; then
-    COMPREPLY=( $(compgen -d ${curr}) )
+    COMPREPLY=( $(compgen -d "${curr}") )
   else
     local hg_root
     HGPLAIN=1 hg_root="$(hg root)"
-    COMPREPLY=( $( for dyr in $(compgen -d ${hg_root}${curr} ) ; do echo ${dyr:${#hg_root}}/ ; done ) )
+    COMPREPLY=( $( for dyr in $(compgen -d "${hg_root}${curr}" ) ; do echo "${dyr:${#hg_root}}/" ; done ) )
   fi
 }
 
@@ -402,6 +410,6 @@ fi
 
 
 # Site-specific stuff not to be shared cross-system
-if [[ -f ${HOME}/.bash_aliases.local ]] ; then
-  . ${HOME}/.bash_aliases.local
+if [[ -f "${HOME}/.bash_aliases.local" ]] ; then
+  . "${HOME}/.bash_aliases.local"
 fi
