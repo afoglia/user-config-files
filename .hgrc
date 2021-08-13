@@ -22,6 +22,14 @@ rebase =
 record =
 showstack = ~/.hgext/showstack.py
 
+[defaults]
+# Try to make shelve at least remotely like "git stash", by actually shelving
+# deleted files. This also shelves added files, so is not ideal, but at least
+# it gets hg closer to a consistent definition of "change". (See `hg shelve
+# --help` and `hg stat --help` and the discrepency on whether a deleted file is
+# a "change".)
+#shelve = --addremove
+
 [extdiff]
 cmd.meld =
 cmd.diffall = meld
