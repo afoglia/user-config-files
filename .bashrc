@@ -244,8 +244,14 @@ else
   fi
 fi
 
+# TODO: Replace /usr/local/ with `brew --prefix`. Already called in
+# .bash_aliases, so maybe they can be cached here. Or maybe reorganize
+# all my bash scripts.
+
 if [[ -f /usr/share/doc/fzf/examples/completion.bash ]]; then
   . /usr/share/doc/fzf/examples/completion.bash
+elif [[ -f /usr/local/opt/fzf/shell/completion.bash ]]; then
+  . /usr/local/opt/fzf/shell/completion.bash
 fi
 
 if type -t _fzf_setup_completion > /dev/null; then
@@ -254,7 +260,11 @@ fi
 
 if [[ -f /usr/share/doc/fzf/examples/key-bindings.bash ]]; then
   . /usr/share/doc/fzf/examples/key-bindings.bash
+elif [[ -f /usr/local/opt/fzf/shell/key-bindings.bash ]]; then
+  . /usr/local/opt/fzf/shell/key-bindings.bash
 fi
+
+
 # TODO: Combine with logic in .lessfilter.
 export FZF_CTRL_T_OPTS="--select-1 --exit-0 --preview '(highlight -O ans --style clarityi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
