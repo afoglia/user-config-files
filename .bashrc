@@ -47,6 +47,11 @@ fi
 shopt -s extglob
 
 # make less more friendly for non-text input files, see lesspipe(1)
+#
+# TODO: /usr/bin/lesspipe only exists in the Debian less package. It
+# does not have any other place to obtain it. So I need to add a
+# method that also works for other systems (i.e. Mac). Probably just
+# setting LESSOPEN to `| /usr/bin/lesspipe %s`.
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)

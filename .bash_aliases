@@ -30,6 +30,10 @@ else
   unalias ls
   function ls () {
     if [[ -t 1 ]]; then
+      # TODO: See if I can remap "G" and "g" in less to not redraw the
+      # screen but scroll. I think "F" for follow will scroll to the
+      # end, and "^C" will then stop following. Or maybe something
+      # involving max-forw-scroll?
       command ls -F -C --color=always "$@" | less -RFX
     else
       command ls -F --color=auto "$@"
