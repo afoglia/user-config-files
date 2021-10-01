@@ -330,7 +330,7 @@ git-cd () {
   fi
   if [[ -z "$1" || "$1" == /* ]]; then
     local git_root
-    git_root="$(git-root)" && cd "${git_root}$1"
+    git_root="$(git-root 2> /dev/null || git rev-parse --show-toplevel)" && cd "${git_root}$1"
   else
     cd "$1"
   fi
@@ -344,7 +344,7 @@ _git-cd () {
     COMPREPLY=( $(compgen -d "${curr}") )
   else
     local git_root
-    git_root="$(git root)"
+    git_root="$(git root 2> /dev/null || git rev-parse --show-toplevel)"
     COMPREPLY=( $( for dyr in $(compgen -d "${git_root}${curr}" ) ; do echo "${dyr:${#git_root}}/" ; done ) )
   fi
 }
