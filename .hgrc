@@ -40,6 +40,13 @@ cmd.diffmerge = /usr/local/bin/diffmerge
 # hg opens all changed files in meld by default. Ugh.
 meld.diffargs=--label=$plabel1 $parent --label=$clabel $child
 
+diffmerge.executable = /usr/local/bin/diffmerge
+diffmerge.args = --result=$output -t1="Local Version" -t2=$output -t3="Other Version" --caption=$output  $local $base $other
+diffmerge.binary = False
+diffmerge.symlinks = False
+diffmerge.gui = True
+diffmerge.premerge = True
+
 [pager]
 pager = less -FRX
 
@@ -49,14 +56,6 @@ aliases = config alias
 colors = debugcolor
 conflicts = resolve -l
 wip = commit --secret
-
-[merge-tools]
-diffmerge.executable = /usr/local/bin/diffmerge
-diffmerge.args = --result=$output -t1="Local Version" -t2=$output -t3="Other Version" --caption=$output  $local $base $other
-diffmerge.binary = False
-diffmerge.symlinks = False
-diffmerge.gui = True
-diffmerge.premerge = True
 
 [commands]
 status.terse = uc
