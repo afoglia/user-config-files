@@ -5,6 +5,7 @@ merge = internal:merge3
 
 [diff]
 git = True
+nobinary = True
 
 [extensions]
 color =
