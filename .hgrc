@@ -58,4 +58,7 @@ diffmerge.symlinks = False
 diffmerge.gui = True
 diffmerge.premerge = True
 
+[commands]
+status.terse = uc
+
 %include ~/.hgrc.local
