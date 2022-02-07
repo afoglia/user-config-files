@@ -3,29 +3,42 @@
 # TODO: Try to be smarter and for languages unsupported by one tool, try to use
 # a later one.
 
-# Highlight is nearly as fast as source-highlight, and comes with much better
-# styles.
-
-if type highlight > /dev/null 2>&1 ; then
-  highlight -O xterm256 --style clarity "$1"
-  exit $?
-fi
-
-# Next try pygmentize because it's so much simpler to customize for dark
-# backgrounds.
-
-if type pygmentize > /dev/null 2>&1 ; then
-  pygmentize -O style=paraiso-dark  "$1"
-  exit $?
-fi
-
-# Source-highlight is much faster, but pygmentize is much, much easier to
-# customize. source-highlight usage is lacking online. Shame, since it's so
-# much faster. I'll try it customizing it again another time.
-
+# Settings for source-highlight
 STYLE="${HOME}/.source-highlight.d/esc-solarized.style"
 OUTLANG="esc-solarized"
-#"${HOME}/.source-highlight.d/esc-solarized.outlang"
+
+
+colorize_file () {
+  # Highlight is nearly as fast as source-highlight, and comes with much better
+  # styles.
+
+  if type highlight > /dev/null 2>&1 ; then
+    # TODO: Pass in filetype if easily determinable. (So I can set the filetype
+    # for .bash_aliases and similar easily.)
+    highlight -O xterm256 --style clarity "$1"
+    if [ $? -eq 0]; then
+      exit 0
+    fi
+  fi
+
+  # Next try pygmentize because it's so much simpler to customize for dark
+  # backgrounds.
+
+  if type pygmentize > /dev/null 2>&1 ; then
+    pygmentize -O style=paraiso-dark  "$1"
+    if [ $? -eq 0]; then
+      exit 0
+    fi
+  fi
+
+  # Source-highlight is much faster, but pygmentize is much, much easier to
+  # customize. source-highlight usage is lacking online. Shame, since it's so
+  # much faster. I'll try it customizing it again another time.
+
+  file -L "$1" | grep -q text && source-highlight --data-dir "${HOME}/.source-highlight.d" --failsafe --infer-lang -f "${OUTLANG}" --style-file="${STYLE}" -i "$1"
+  exit $?
+}
+
 
 case "$1" in
   *.diff|*.patch)
@@ -35,15 +48,19 @@ case "$1" in
     # I think the base style is better than mine for Changelogs 
     source-highlight --failsafe -f esc --lang-def=changelog.lang \
       -i "$1" ;;
-  *Makefile|*makefile) 
+  *Makefile|*makefile)
+    # highlight's syntax for Makefile doesn't highlight targets, but only
+    # certain keywords. source-highlight does a much better job.
     source-highlight --failsafe -f esc --lang-def=makefile.lang \
-      --style-file="${STYLE}" -i "$1" ;;
+      --style-file="${STYLE}" -i "$1"
+    ;;
   *BUILD)
-    source-highlight --failsafe -f esc --src-lang=py --style-file="${STYLE}" -i "$1" ;;
+    highlight -O xterm256 --style clarity --src-lang py "$1"
+    # source-highlight --failsafe -f esc --src-lang=py --style-file="${STYLE}" -i "$1"
+    ;;
   *)
     # Unhandled format.
-    file "$1" | grep -q text && source-highlight --data-dir "${HOME}/.source-highlight.d" --failsafe --infer-lang -f "${OUTLANG}" --style-file="${STYLE}" -i "$1"
-    exit $?
+    colorize_file "$1"
 esac
 
 # No further processing by lesspipe necessary
