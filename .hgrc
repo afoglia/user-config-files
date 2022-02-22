@@ -2,6 +2,7 @@
 ignore = ~/.hgignore
 interface.chunkselector = text
 merge = internal:merge3
+mergemarkers = detailed
 
 [diff]
 git = True
