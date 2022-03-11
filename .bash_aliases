@@ -59,7 +59,13 @@ if command -v annotate-output > /dev/null 2>&1 ; then
 fi
 
 # TODO: Replace with function that can re-nice processes, or create rerealnice
-alias realnice="nice -n 19 ionice -c2 -n7"
+if [[ $(uname -s) == "Darwin" ]]; then
+  # The "utility" taskpolicy slowed the process so much it took
+  # forever. Instead, stick with "standard" policy.
+  alias realnice="nice -n 19 taskpolicy -d standard"
+else
+  alias realnice="nice -n 19 ionice -c2 -n7"
+fi
 if [ -n "${BASH_VERSION}" ]; then
   complete -F _command realnice
 fi
