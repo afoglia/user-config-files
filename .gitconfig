@@ -54,6 +54,14 @@
   ack-ninja = "ack \"$@\" *.ninja #"
   ack-py = "ack \"$@\" *.py #"
   ack-proto = "ack \"$@\" *.proto #"
+
+  # TODO: Make a "git stage" alias that acts like "git add", but also allows
+  # "git unstage" to reset a file in the working copy from the index.
+  # ("stage/unstage" sounds better than "add/unadd".) Might be as easy as these
+  # two:
+  stage = add
+  unstage = restore --staged
+
 [color "diff"]
   new = green bold
   old = red bold
