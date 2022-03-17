@@ -171,6 +171,21 @@ if [ -x /Applications/Emacs.app/Contents/MacOS/bin/emacsclient ] ; then
   # any file names passed in are treated as in the home directory, rather than
   # in the cwd. Using -- works though it's undocumented.
   alias emacs_app="open -a Emacs --"
+else
+  if [[ "$(uname)" == "Linux" ]]; then
+    emacs () {
+      # Silence messages from well-known gtk errors
+      # https://debbugs.gnu.org/cgi/bugreport.cgi?bug=22000
+
+      # grep version. Leaves the blank link outputted before the assertion
+      # message
+      # command emacs "$@" 2> >( grep -v -E "^\(emacs:.*\): Gtk-CRITICAL .* assertion 'extra_space >= 0' failed" >&2 )
+
+      # sed version, which seems to work, though I think it should still print
+      # the message.
+      command emacs "$@" 2> >( sed -e "N;s/^\\n(emacs:.*): Gtk-CRITICAL .* assertion 'extra_space >= 0' failed$//;D" >&2 )
+    }
+  fi
 fi
 
 # Use server/client mode
