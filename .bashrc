@@ -305,6 +305,10 @@ if [ -f ~/.bashrc.local ]; then
   . ~/.bashrc.local
 fi
 
+if [[ -x /usr/games/fortune && -d /usr/share/games/fortunes/it ]]; then
+  find /usr/share/games/fortunes/it -type f | grep -v \\. | xargs /usr/games/fortune
+fi
+
 # TODO: Refactor into a bashrc.d/ directory layout, and put all the
 # color prompt stuff together.
 unset color_prompt force_color_prompt
