@@ -55,12 +55,18 @@ case "$1" in
       --style-file="${STYLE}" -i "$1"
     ;;
   *BUILD)
+    # echo "Build file!"
+    # sleep 1
     highlight -O xterm256 --style clarity --src-lang py "$1"
     # source-highlight --failsafe -f esc --src-lang=py --style-file="${STYLE}" -i "$1"
+    ;;
+  *.hgrc|*gitconfig|*.git/config|*.hgrc.local)
+    source-highlight --failsafe -f esc --lang-def desktop.lang --style-file="${STYLE}" -i "$1"
     ;;
   *)
     # Unhandled format.
     colorize_file "$1"
+    ;;
 esac
 
 # No further processing by lesspipe necessary
