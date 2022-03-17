@@ -16,7 +16,7 @@ colorize_file () {
     # TODO: Pass in filetype if easily determinable. (So I can set the filetype
     # for .bash_aliases and similar easily.)
     highlight -O xterm256 --style clarity "$1"
-    if [ $? -eq 0]; then
+    if [ $? -eq 0 ]; then
       exit 0
     fi
   fi
@@ -26,7 +26,7 @@ colorize_file () {
 
   if type pygmentize > /dev/null 2>&1 ; then
     pygmentize -O style=paraiso-dark  "$1"
-    if [ $? -eq 0]; then
+    if [ $? -eq 0 ]; then
       exit 0
     fi
   fi
