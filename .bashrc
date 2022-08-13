@@ -183,11 +183,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Configure ls to not use quotes. I don't like the way they stagger the output.
-# Try "escape" style, and see if it's better than the old default "literal"
-# https://unix.stackexchange.com/questions/258679/why-is-ls-suddenly-wrapping-items-with-spaces-in-single-quotes
-# https://www.gnu.org/software/coreutils/manual/html_node/Formatting-the-file-names.html
-export QUOTING_STYLE=escape
 
 # Configure PYTHONSTARTUP file
 export PYTHONSTARTUP=~/.pythonrc

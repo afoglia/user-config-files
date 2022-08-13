@@ -30,11 +30,34 @@ else
   unalias ls
   function ls () {
     if [[ -t 1 ]]; then
+      # Outputting to a terminal
+      #
+      # We'll pipe to less, and use color. Also, we'll try to set the
+      # quoting style. The default adds quotes, but only when
+      # necessary, which leads to staggered columns.
+      #
+      # Note: Do not set QUOTING_STYLE!!! Many configure scripts (e.g.
+      # dbus-python) check the output of "ls -t" against a fixed
+      # string that assumes the old quoting style.
+      #
+      # Notes on styles I've tried:
+      # Try "escape" style, and see if it's better than the old
+      # default "literal". It doesn't escape parentheses and quotes
+      # though. Only spaces.
+      #
+      # Try "locale" as that may be easier to copy-paste, though it
+      # wouldn't surprise me if the quoting does not play nice with
+      # the trailing characters when piping the output to another
+      # command such as xargs.
+      #
+      # https://unix.stackexchange.com/questions/258679/why-is-ls-suddenly-wrapping-items-with-spaces-in-single-quotes
+      # https://www.gnu.org/software/coreutils/manual/html_node/Formatting-the-file-names.html
+      #
       # TODO: See if I can remap "G" and "g" in less to not redraw the
       # screen but scroll. I think "F" for follow will scroll to the
       # end, and "^C" will then stop following. Or maybe something
       # involving max-forw-scroll?
-      command ls -F -C --color=always "$@" | less -RFX
+      command ls -F -C --color=always --quoting-style=locale "$@" | less -RFX
     else
       command ls -F --color=auto "$@"
     fi
