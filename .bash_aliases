@@ -238,8 +238,8 @@ function emacsc () {
     #
     # In emacs 27, the server socket is under XDG_RUNTIME_DIR.  In earlier
     # versions it's either under TMPDIR or at ~/.emacs_server. (The latter is
-    # likely either windows or really, really old releases.)  In general emacs
-    # usually, uses the variable `server-socket-dir`, so if this breaks, that's
+    # likely either windows or really, really old releases.)  In general, emacs
+    # usually uses the variable `server-socket-dir`, so if this breaks, that's
     # the variable to compare against. (There are some other cases. Look in
     # server.el for details.)
     #
