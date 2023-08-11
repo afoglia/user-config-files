@@ -65,9 +65,13 @@ else
   # alias ls="ls -F --color=auto"
 fi
 
-# Use bc extensions from
+#
+# bc
+#
+# Use extensions from https://github.com/susca/bc-extensions. (The
+# version from
 # http://www.terminally-incoherent.com/blog/reference/bc-extensions/
-# if downloaded
+# has bugs in tanh and sech.)
 bc () {
   if [[ -f "${HOME}/.bc/extensions.bc" ]]; then
     command bc -l ~/.bc/extensions.bc "$@"
