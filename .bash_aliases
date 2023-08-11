@@ -27,7 +27,9 @@ else
   # before even running the "unalias" statement, which causes problems.
   #
   # TODO: Is there a better way?
-  unalias ls
+  if [[ $(type -t ls) == "alias" ]]; then
+    unalias ls || true
+  fi
   function ls () {
     if [[ -t 1 ]]; then
       # Outputting to a terminal
