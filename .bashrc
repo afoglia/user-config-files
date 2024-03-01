@@ -301,7 +301,7 @@ if [ -f ~/.bashrc.local ]; then
 fi
 
 if [[ -x /usr/games/fortune && -d /usr/share/games/fortunes/it ]]; then
-  find /usr/share/games/fortunes/it -type f | grep -v \\. | xargs /usr/games/fortune
+  /usr/games/fortune /usr/share/games/fortunes/it
 fi
 
 # TODO: Refactor into a bashrc.d/ directory layout, and put all the
