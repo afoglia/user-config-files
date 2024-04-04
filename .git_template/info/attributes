@@ -1,0 +1,9 @@
+# Markdown files can contain lines that end in spaces.
+#
+# Two trailing spaces mean to insert a carriage return.
+#
+# Would be nice if we could do better and only allow two spaces, and not one,
+# or three or more, but that's probably asking too much for git.
+*.md        whitespace=-blank-at-eol
+*.mdwn      whitespace=-blank-at-eol
+*.markdown  whitespace=-blank-at-eol
