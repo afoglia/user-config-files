@@ -14,6 +14,9 @@
 __pycache__/*
 *.py[cod]
 
+# Python venvs
+.venv/
+
 # Stored annotate stdout/stderr logs
 *.annotate
 
