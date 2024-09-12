@@ -2,3 +2,16 @@
 # TODO: Improve this to also handle options, and figure out why the default is
 # "complete -F _minimal printenv".
 complete -e printenv
+
+
+# pipx
+#
+# TODO: Move this to be lazy-loaded using bash-completion. See
+# /usr/share/bash-completion/bash_completion and
+# https://github.com/scop/bash-completion for details. Also see if I
+# can do similar for my config-vc alias.
+if command -v register-python-argcomplete3 > /dev/null ; then
+  if command -v pipx > /dev/null ; then
+    eval "$(register-python-argcomplete3 pipx)"
+  fi
+fi
