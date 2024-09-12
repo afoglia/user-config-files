@@ -302,8 +302,14 @@ if [ -f ~/.bashrc.local ]; then
   . ~/.bashrc.local
 fi
 
-if [[ -x /usr/games/fortune && -d /usr/share/games/fortunes/it ]]; then
-  /usr/games/fortune /usr/share/games/fortunes/it
+if [[ -x /usr/games/fortune ]]; then
+  if [[ -d /usr/share/games/fortunes/it ]]; then
+    /usr/games/fortune /usr/share/games/fortunes/it
+  elif type dpkg > /dev/null; then
+    # As of v2, debian's fortunes-it package no longer puts the
+    # fortunes in a separate directory.
+    dpkg -L fortunes-it | grep "/usr/share/games/fortunes/" | grep -v \\. | xargs -r /usr/games/fortune
+  fi
 fi
 
 # TODO: Refactor into a bashrc.d/ directory layout, and put all the
