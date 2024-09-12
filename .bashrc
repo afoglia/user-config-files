@@ -194,8 +194,10 @@ export PYTHONSTARTUP=~/.pythonrc
 #
 # This must come before /etc/bash_completion, because that's when
 # virtualenvwrapper.sh gets sourced in Ubuntu's packaging.
-export VIRTUALENVWRAPPER_PYTHON=$(which python)
-export VIRTUALENVWRAPPER_VIRTUALENV=$(which virtualenv)
+# (Upgrade to python3, as that's what newest Ubuntu needs it to be...)
+# TODO: Make smarter, by knowing what to fallback to. Maybe get the python version from the shebang line in virtualenv.
+export VIRTUALENVWRAPPER_PYTHON=$(type -P python3)
+export VIRTUALENVWRAPPER_VIRTUALENV=$(type -P virtualenv)
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
