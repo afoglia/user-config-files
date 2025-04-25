@@ -352,7 +352,7 @@ if [[ $(uname -s) == "Darwin" ]] ; then
   # Add alias to set-up and tear down permissions required for brew
   #
   # This is unnecessary and counter-productive on Apple Silicon
-  if [[ $(uname -a) != "arm64" ]] ; then
+  if [[ $(uname -m) != "arm64" ]] ; then
     brew () {
       if [[ "$1" != "install" && "$1" != "upgrade" && "$1" != "update" ]]; then
         # sudo permissions not needed
