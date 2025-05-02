@@ -17,3 +17,6 @@ SAVEHIST=20000
 unsetopt autocd extendedglob
 bindkey -e
 # End of lines configured by zsh-newuser-install
+
+# History expansion on space
+bindkey " " magic-space
