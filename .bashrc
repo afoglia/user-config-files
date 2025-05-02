@@ -227,8 +227,8 @@ fi
 export WORKON_HOME="${HOME}/.virtualenvs"
 if [[ -f /usr/local/bin/virtualenvwrapper_bashrc ]]; then
   . /usr/local/bin/virtualenvwrapper_bashrc
-elif [[ -f "/opt/homebrew/bin/virtualenvwrapper_lazy.sh" ]]; then
-  . "/opt/homebrew/bin/virtualenvwrapper_lazy.sh"
+elif [[ -n "${HOMEBREW_PREFIX}" && -f "${HOMEBREW_PREFIX}/bin/virtualenvwrapper_lazy.sh" ]]; then
+  . "${HOMEBREW_PREFIX}/bin/virtualenvwrapper_lazy.sh"
 elif [[ -f "${HOME}/Library/Python/2.7/bin/virtualenvwrapper.sh" ]]; then
   # Location of virtualenvwrapper on osx.
   . "${HOME}/Library/Python/2.7/bin/virtualenvwrapper.sh"
