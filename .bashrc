@@ -311,15 +311,25 @@ if [ -f ~/.bashrc.local ]; then
   . ~/.bashrc.local
 fi
 
+# Fortunes
 if [[ -x /usr/games/fortune ]]; then
+  fortune_cmd=/usr/games/fortune
+elif type fortune &> /dev/null ; then
+  fortune_cmd="fortune"
+fi
+
+if [[ -n "${fortune_cmd}" ]]; then
+  # Italian fortunes
   if [[ -d /usr/share/games/fortunes/it ]]; then
-    /usr/games/fortune /usr/share/games/fortunes/it
+    "${fortune_cmd}" /usr/share/games/fortunes/it
   elif type dpkg > /dev/null; then
     # As of v2, debian's fortunes-it package no longer puts the
     # fortunes in a separate directory.
-    dpkg -L fortunes-it | grep "/usr/share/games/fortunes/" | grep -v \\. | xargs -r /usr/games/fortune
+    dpkg -L fortunes-it | grep "/usr/share/games/fortunes/" | grep -v \\. | xargs -r "${fortune_cmd}"
   fi
 fi
+unset fortune_cmd
+
 
 # TODO: Refactor into a bashrc.d/ directory layout, and put all the
 # color prompt stuff together.
