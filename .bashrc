@@ -52,7 +52,14 @@ shopt -s extglob
 # does not have any other place to obtain it. So I need to add a
 # method that also works for other systems (i.e. Mac). Probably just
 # setting LESSOPEN to `| /usr/bin/lesspipe %s`.
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+if [ -x /usr/bin/lesspipe ] ; then
+  # Debian lesspipe script that comes packaged in the deb
+  eval "$(SHELL=/bin/sh lesspipe)"
+elif type lesspipe.sh &> /dev/null ; then
+  # lesspipe.sh
+  # <https://github.com/wofr06/lesspipe>
+  export LESSOPEN="| lesspipe.sh"
+fi
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then

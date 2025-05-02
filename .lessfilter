@@ -3,6 +3,12 @@
 # TODO: Try to be smarter and for languages unsupported by one tool, try to use
 # a later one.
 
+# TODO: Try to come up with syntax highlighting for requirements.txt files.
+# Seems like highlight's yaml format is pretty close.
+
+# TODO: Consider replacing all the colorizer checking with a LESSCOLORIZER
+# variable as shown in https://www.miskatonic.org/2020/006/24/lessfilter/
+
 # Settings for source-highlight
 STYLE="${HOME}/.source-highlight.d/esc-solarized.style"
 OUTLANG="esc-solarized"
