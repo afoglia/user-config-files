@@ -102,7 +102,7 @@ trunc_path ()
 {
   # DIR=$(pwd | sed ${_sed_extended_regexp_flag} "s,^${HOME%${USER}}($USER)?,~," );
   # Requires extglob shell options
-  DIR=${PWD/#${HOME%${USER}}?(${USER})/\~}
+  DIR=${PWD/#${HOME%"${USER}"}?(${USER})/\~}
   DIR=$(echo "${DIR}" | awk -F / '{ if (NF>4) { print $1"/.../"$(NF-2)"/"$(NF-1)"/"$NF } else { print $0 } }' ) ;
   echo "${DIR}";
   return 0
@@ -118,7 +118,7 @@ ps_trunc_path ()
     return "${EXITSTATUS}"
 }
 
-if [ ${CLICOLOR} ] || [ -n "${COLORTERM}" ] ; then
+if [ "${CLICOLOR}" ] || [ -n "${COLORTERM}" ] ; then
     color_prompt=yes
 fi
 
