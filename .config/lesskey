@@ -1,0 +1,9 @@
+# Less custom keybindings
+
+#command
+
+# Quit less, leaving current screen visible. This doesn't mean all the file
+# contents remain, only what is currently on the screen. This requires less
+# version 598 or newer.
+# <https://github.com/gwsw/less/issues/36#issuecomment-913200056>
+Q toggle-option -!^Predraw-on-quit\nq
